@@ -1,8 +1,8 @@
 {
-  "name": "vue-ui",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "gvui",
+  "version": "0.0.2",
+  "description": "一个基于Vue的UI框架",
+  "main": "dist/index.js",
   "scripts": {
     "dev-test": "parcel watch test/* --no-cache & karma start",
     "test": "parcel build test/* --no-cache --no-minify && karma start --single-run"
