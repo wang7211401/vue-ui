@@ -7,10 +7,11 @@
 <script>
 import './svg'
 export default {
+    name:'Icon',
     props:['name']
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .g-icon {
         width: 1em; height: 1em;
         vertical-align: -0.15em;
