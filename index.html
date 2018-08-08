@@ -13,7 +13,11 @@
             padding: 0;
             box-sizing: border-box;
         }
-        img{max-width: 100%;}
+
+        img {
+            max-width: 100%;
+        }
+
         html {
             --button-height: 32px;
             --font-size: 14px;
@@ -42,32 +46,16 @@
 
 <body>
     <div id="app">
-        <div style="border: 1px solid black;">
-            <g-row gutter="20" align="center">
-                <g-col>1</g-col>
-                <g-col>2</g-col>
-            </g-row>
-            <g-row gutter="20" align="left">
-                <g-col>1</g-col>
-                <g-col>2</g-col>
-                <g-col>3</g-col>
-            </g-row>
-            <g-row gutter="20" align="right">
-                <g-col>1</g-col>
-                <g-col></g-col>2</g-col>
-                <g-col>3</g-col>
-                <g-col>4</g-col>
-            </g-row>
-            <g-row gutter="20">
-                <g-col span="2">1</g-col>
-                <g-col span="22">11</g-col>
-            </g-row>
-            <g-row gutter="20">
-                <g-col span="4">1</g-col>
-                <g-col span="20">11</g-col>
-            </g-row>
-            <hr>  
-        </div>
+
+        <g-row gutter="20" align="center">
+            <g-col span="2" :phone="{span:24}" :ipad="{span:8}" :narrow-pc="{span:4}" :pc="{span:2}" :wide-pc="{span:1}">
+                1
+            </g-col>
+            <g-col span="22" :phone="{span:24}" :ipad="{span:16}" :narrow-pc="{span:20}" :pc="{span:22}" :wide-pc="{span:23}">11
+            </g-col>
+        </g-row>
+        <hr>
+
         <!-- <div class="box">
             <g-input value="张三" disabled></g-input>
             <g-input value="李四" readonly></g-input>
