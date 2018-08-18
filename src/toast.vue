@@ -18,12 +18,11 @@ export default {
   name: "GvuiToast",
   props: {
     autoClose: {
-      type: Boolean,
-      default: true
-    },
-    autoCloseDelay: {
-      type: Number,
-      default: 50
+      type: [Boolean, Number],
+      default: 2,
+      validator(value) {
+        return value === false || typeof value === "number";
+      }
     },
     closeButton: {
       type: Object,
@@ -46,7 +45,6 @@ export default {
       }
     }
   },
-  created() {},
   mounted() {
     this.updateStyles();
     this.execAutoClose();
@@ -70,7 +68,7 @@ export default {
       if (this.autoClose) {
         setTimeout(() => {
           this.close();
-        }, this.autoCloseDelay * 1000);
+        }, this.autoClose * 1000);
       }
     },
     close() {
@@ -126,26 +124,26 @@ $toast-bg: rgba(0, 0, 0, 0.75);
   $animation-duration: 300ms;
   &.position-top {
     top: 0;
-    .toast{
-        border-top-left-radius:0;
-        border-top-right-radius:0;
-        animation: slide-down $animation-duration;
+    .toast {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      animation: slide-down $animation-duration;
     }
   }
   &.position-middle {
     top: 50%;
     transform: translate(-50%, -50%);
-    .toast{
-        animation: fade-in $animation-duration;
+    .toast {
+      animation: fade-in $animation-duration;
     }
   }
   &.position-bottom {
     bottom: 0;
     transform: translateX(-50%);
-    .toast{
-        border-bottom-left-radius:0;
-        border-bottom-right-radius:0;
-        animation: slide-up $animation-duration;
+    .toast {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      animation: slide-up $animation-duration;
     }
   }
 }
