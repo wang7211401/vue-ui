@@ -14,7 +14,7 @@ export default {
             type:String,
             validator(value){
                 console.log(value)
-                return ['left','center','right'].includes(value)
+                return ['left','center','right'].indexOf(value) > -1
             }
         }
     },

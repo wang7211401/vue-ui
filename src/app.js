@@ -40,16 +40,18 @@ new Vue({
         message: '123'
     },
     created() {
-       this.$toast('<div>关闭</div>',{
-           enableHtml:true,
-           closeButton:{
-               'text':"close",
-               callback(){
-                   console.log('关闭了')
-               }
-           }
-       },
-       )
+        this.$toast('你的智商需要充值！', {
+            position: 'bottom',
+            enableHtml: false,
+            closeButton: {
+              text: '已充值',
+              callback () {
+                console.log('他说已经充值智商了')
+              }
+            },
+            autoClose: false,
+            autoCloseDelay: 3
+        })
     },
     methods: {
        showToast(){
