@@ -27,6 +27,10 @@ Vue.component('g-sider', Sider)
 Vue.component('g-toast',Toast)
 Vue.use(plugin)
 
+import createElement from 'vue'
+
+const h = createElement
+
 new Vue({
     el: '#app',
     data: {
@@ -36,11 +40,20 @@ new Vue({
         message: '123'
     },
     created() {
-       
+       this.$toast('<div>关闭</div>',{
+           enableHtml:true,
+           closeButton:{
+               'text':"close",
+               callback(){
+                   console.log('关闭了')
+               }
+           }
+       },
+       )
     },
     methods: {
        showToast(){
-           this.$toast('我是 message')
+        //    this.$toast('我是 message')
        }
     }
 })
