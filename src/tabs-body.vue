@@ -5,7 +5,11 @@
 </template>
 <script>
 export default {
-    name:'GvuiTabsBody'
+    name:'GvuiTabsBody',
+    inject:['eventBus'],
+    created(){
+        
+    }
 }
 </script>
 <style>
