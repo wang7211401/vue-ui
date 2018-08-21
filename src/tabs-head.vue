@@ -13,7 +13,6 @@ export default {
   inject: ["eventBus"],
   created() {
     this.eventBus.$on("update:selected", (item, vm) => {
-      console.log(item, vm);
       let { width, height, top, left } = vm.$el.getBoundingClientRect();
       this.$refs.line.style.width = `${width}px`;
       this.$refs.line.style.left = `${left}px`;
@@ -24,11 +23,13 @@ export default {
 <style lang="scss" scoped>
 $tabs-height: 40px;
 $blue: blue;
+$border-color:#ddd;
 .tabs-head {
   display: flex;
   height: $tabs-height;
   justify-content: flex-start;
   position: relative;
+  border-bottom:1px solid $border-color;
   > .line {
     position: absolute;
     bottom: 0;
@@ -37,6 +38,9 @@ $blue: blue;
   }
   > .actions-wrapper {
     margin-left: auto;
+    display: flex;
+    align-items: center;
+    padding:0 1em;
   }
 }
 </style>

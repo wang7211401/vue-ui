@@ -39,9 +39,9 @@ Vue.component('g-tabs-pane', TabsPane)
 
 Vue.use(plugin)
 
-import createElement from 'vue'
+// import createElement from 'vue'
 
-const h = createElement
+// const h = createElement
 
 new Vue({
     el: '#app',
