@@ -38,12 +38,12 @@
 
 <body>
     <div id="app">
-        <g-tabs :selected.sync="selectedTab" @update:selected="yyy">
+        <g-tabs :selected.sync="selectedTab">
             <g-tabs-head>
                 <template slot="actions">
                     <button>设置</button>
                 </template>
-                <g-tabs-item name="women">
+                <g-tabs-item name="women" disabled>
                     <g-icon name="setting"></g-icon>美女
                 </g-tabs-item>
                 <g-tabs-item name="finance">
