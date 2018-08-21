@@ -46,7 +46,7 @@ Vue.use(plugin)
 new Vue({
     el: '#app',
     data: {
-       selectedTab:'women'
+       selectedTab:'finance'
     },
     created() {
     },
