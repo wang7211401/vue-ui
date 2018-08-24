@@ -39,11 +39,14 @@
 <body>
     <div id="app">
         <div style="overflow: hidden;padding:150px;">
-            <g-popover position="top" trigger="hover">
-                <template slot="content">
+            <g-popover position="top">
+                <template slot="content" slot-scope="{close}">
                     <div>popover 内容</div>
+                    <div>popover <a href="http://qq.com">看新网</a> 内容</div>
+                    <g-button @click="close">关闭</g-button> 
                 </template>
-                <button style="max-width: 10em;">点我popover 内容popover 内容popover 内容popover 内容popover 内容popover 内容</button>
+                <button style="max-width: 10em;">点我popover 内容popover 内容popover 内容popover 内容popover 内容popover 内容
+                </button>
             </g-popover>
             <g-popover position="bottom" trigger="hover">
                 <template slot="content">
