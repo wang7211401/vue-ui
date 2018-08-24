@@ -53,8 +53,8 @@ new Vue({
     created() {
     },
     methods: {
-        yyy(data){
-            console.log('yyy',data)
+        yyy(){
+            console.log('yyy')
         },
         showToast() {
             this.$toast(`你的智商目前为 ${parseInt(Math.random() * 100)}。你的智商需要充值！`, {
