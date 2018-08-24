@@ -39,15 +39,28 @@
 <body>
     <div id="app">
         <div style="overflow: hidden;padding:150px;">
-            <g-popover>
+            <g-popover position="top">
                 <template slot="content">
-                    <div>popover 内容popover 内容popover 内容popover 内容popover 内容popover 内容popover 内容</div>
+                    <div>popover 内容</div>
+                </template>
+                <button style="max-width: 10em;">点我popover 内容popover 内容popover 内容popover 内容popover 内容popover 内容</button>
+            </g-popover>
+            <g-popover position="bottom">
+                <template slot="content">
+                    <div>askdjsakdjsakjdslkjdlskjdlsjkdlskjdlsjkdlskjdlsajkdlajkdlkajdlksajdladaskdjsakdjsakjdslkjdlskjdlsjkdlskjdlsjkdlskjdlsajkdlajkdlkajdlksajdlad</div>
                 </template>
                 <g-button>点我</g-button>
             </g-popover>
-            <g-popover>
+            <g-popover position="left">
                 <template slot="content">
-                    <div>popover 内容</div>
+                    <div>askdjsakdjsakjdslkjdlskjdlsjkdlskjdlsjkdlskjdlsajkdlajkdlkajdlksajdladaskdjsakdjsakjdslkjdlskjdlsjkdlskjdlsjkdlskjdlsajkdlajkdlkajdlksajdlad</div>
+                </template>
+                <g-button>点我</g-button>
+            </g-popover>
+
+            <g-popover position="right">
+                <template slot="content">
+                    <div>askdjsakdjsakjdslkjdlskjdlsjkdlskjdlsjkdlskjdlsajkdlajkdlkajdlksajdladaskdjsakdjsakjdslkjdlskjdlsjkdlskjdlsjkdlskjdlsajkdlajkdlkajdlksajdlad</div>
                 </template>
                 <g-button>点我</g-button>
             </g-popover>
