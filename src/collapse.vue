@@ -12,8 +12,8 @@ export default {
             type:Boolean,
             default:false
         },
-        seleted:{
-            type:String
+        selected:{
+            type:Array
         }
     },
     data(){
@@ -29,9 +29,23 @@ export default {
         }
     },
     mounted(){
-        this.eventBus.$emit('update:seleted',this.seleted)
-        this.eventBus.$on('update:selected',(name)=>{
-            this.$emit('update:selected',name)
+        this.eventBus.$emit('update:selected',this.selected)
+        this.eventBus.$on('update:addSelected',(name)=>{
+            let selectedCopy = JSON.parse(JSON.stringify(this.selected))
+            if(this.single){
+                selectedCopy = [name]
+            }else{
+                selectedCopy.push(name)
+            }
+            this.eventBus.$emit('update:selected',selectedCopy)
+            this.$emit('update:selected',selectedCopy)
+        })
+        this.eventBus.$on('update:removeSelected',(name)=>{
+            let selectedCopy = JSON.parse(JSON.stringify(this.selected))
+            let index = selectedCopy.indexOf(name)
+            selectedCopy.splice(index,1)    
+            this.eventBus.$emit('update:selected',selectedCopy)
+            this.$emit('update:selected',selectedCopy)
         })
     }
 }
