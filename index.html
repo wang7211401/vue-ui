@@ -37,38 +37,14 @@
 </head>
 
 <body>
-    <div id="app">
-        <div style="overflow: hidden;padding:150px;">
-            <g-popover position="top">
-                <template slot="content" slot-scope="{close}">
-                    <div>popover 内容</div>
-                    <div>popover <a href="http://qq.com">看新网</a> 内容</div>
-                    <g-button @click="close">关闭</g-button> 
-                </template>
-                <button style="max-width: 10em;">点我popover 内容popover 内容popover 内容popover 内容popover 内容popover 内容
-                </button>
-            </g-popover>
-            <g-popover position="bottom" trigger="hover">
-                <template slot="content">
-                    <div>askdjsakdjsakjdslkjdlskjdlsjkdlskjdlsjkdlskjdlsajkdlajkdlkajdlksajdladaskdjsakdjsakjdslkjdlskjdlsjkdlskjdlsjkdlskjdlsajkdlajkdlkajdlksajdlad</div>
-                </template>
-                <g-button>点我</g-button>
-            </g-popover>
-            <g-popover position="left" trigger="hover">
-                <template slot="content">
-                    <div>askdjsakdjsakjdslkjdlskjdlsjkdlskjdlsjkdlskjdlsajkdlajkdlkajdlksajdladaskdjsakdjsakjdslkjdlskjdlsjkdlskjdlsjkdlskjdlsajkdlajkdlkajdlksajdlad</div>
-                </template>
-                <g-button>点我</g-button>
-            </g-popover>
-
-            <g-popover position="right" trigger="hover">
-                <template slot="content">
-                    <div>askdjsakdjsakjdslkjdlskjdlsjkdlskjdlsjkdlskjdlsajkdlajkdlkajdlksajdladaskdjsakdjsakjdslkjdlskjdlsjkdlskjdlsjkdlskjdlsajkdlajkdlkajdlksajdlad</div>
-                </template>
-                <g-button>点我</g-button>
-            </g-popover>
-        </div>
-    </div>
+   <div id="app" style="padding:100px;">
+       <g-collapse>
+           <g-collapse-item title="标题1">内容1</g-collapse-item>
+           <g-collapse-item title="标题2">内容2</g-collapse-item>
+           <g-collapse-item title="标题3">内容3</g-collapse-item>
+           <g-collapse-item title="标题4">内容4</g-collapse-item>
+       </g-collapse>
+   </div>
     <script src="./src/app.js"></script>
 </body>
 
