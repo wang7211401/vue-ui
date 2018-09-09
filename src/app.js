@@ -52,7 +52,7 @@ Vue.use(plugin)
 new Vue({
     el: '#app',
     data: {
-       selectedTab:'finance'
+       selectedTab:'2'
     },
     created() {
     },
