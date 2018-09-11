@@ -1,0 +1,6 @@
+---
+title: Tabs
+---
+ # Tabs
+
+
