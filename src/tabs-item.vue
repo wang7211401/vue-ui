@@ -57,9 +57,8 @@ export default {
         display: flex;
         align-items: center;
         &.active{
-            background: #ccc;
-            color:red;
-            font-weight:bold;
+            color:$blue;
+            // font-weight: 700;
         }
         &.disabled{
             color:$disabled-text-color;
