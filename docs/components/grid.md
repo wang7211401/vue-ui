@@ -5,6 +5,5 @@ title: Grid
 
  24格网格
 
-<ClientOnly>
-    <grid-demos></grid-demos>
-</ClientOnly>
+<grid-demos></grid-demos>
+

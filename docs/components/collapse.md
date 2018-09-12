@@ -5,9 +5,9 @@ title: Collapse
 
  使用方法
 
-<ClientOnly>
-    <collapse-demos></collapse-demos>
-</ClientOnly>
+
+<collapse-demos></collapse-demos>
+
 代码
 
 ``` js
