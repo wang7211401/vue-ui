@@ -1,11 +1,9 @@
 <template>
-    <div class="footer">
+    <div class="g-footer">
         <slot></slot>
     </div>
 </template>
 <style lang="scss" scoped>
-.footer{
-    
-}
+
 </style>
 

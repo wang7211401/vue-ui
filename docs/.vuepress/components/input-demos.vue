@@ -7,9 +7,9 @@
         <pre><code>{{content}}</code></pre>
         <h2>双向绑定</h2>
         <g-input v-model="value"></g-input>
-        <div>
+        <p>
             value:{{value}}
-        </div>
+        </p>
     </div> 
 </template>
 <script>

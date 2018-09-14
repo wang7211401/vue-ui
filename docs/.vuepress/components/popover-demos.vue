@@ -28,6 +28,13 @@
                     弹出内容
                 </template>
             </g-popover>
+            
+            <g-popover position="top">
+                <g-button>弹出内容点击关闭</g-button>
+                <template slot="content" slot-scope="{close}">
+                    弹出内容 | <g-button @click="close">关闭</g-button>
+                </template>
+            </g-popover>
 
             <pre><code>{{code}}</code></pre>
         </div>
@@ -62,7 +69,6 @@
                 </template>
             </g-popover>
         </div>
-        
     </div> 
 </template>
 <script>
@@ -77,34 +83,40 @@ export default {
   data(){
     return {
         code:`
-        <g-popover>
-            <g-button>上方弹出</g-button>
-            <template slot="content">
-                弹出内容
-            </template>
-        </g-popover>
+            <g-popover>
+                <g-button>上方弹出</g-button>
+                <template slot="content">
+                    弹出内容
+                </template>
+            </g-popover>
 
-        <g-popover position="bottom">
-            <g-button>下方弹出</g-button>
-            <template slot="content">
-                弹出内容
-            </template>
-        </g-popover>
+            <g-popover position="bottom">
+                <g-button>下方弹出</g-button>
+                <template slot="content">
+                    弹出内容
+                </template>
+            </g-popover>
 
-        <g-popover position="left">
-            <g-button>左边弹出</g-button>
-            <template slot="content">
-                弹出内容
-            </template>
-        </g-popover>
+            <g-popover position="left">
+                <g-button>左边弹出</g-button>
+                <template slot="content">
+                    弹出内容
+                </template>
+            </g-popover>
 
-        <g-popover position="right">
-            <g-button>右边弹出</g-button>
-            <template slot="content">
-                弹出内容
-            </template>
-        </g-popover>
-        `.replace(/^\t+| +/g, '').trim()
+            <g-popover position="right">
+                <g-button>右边弹出</g-button>
+                <template slot="content">
+                    弹出内容
+                </template>
+            </g-popover>
+            <g-popover position="top">
+                <g-button>弹出内容点击关闭</g-button>
+                <template slot="content" slot-scope="{close}">
+                    弹出内容 | <g-button @click="close">关闭</g-button>
+                </template>
+            </g-popover>
+        `.replace(/^ {12}/gm, '').trim()
     }
   }
 };
