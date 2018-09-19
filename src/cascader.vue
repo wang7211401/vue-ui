@@ -1,30 +1,31 @@
 <template>
     <div class="cascader">
-        <div class="trigger">
-            <slot></slot>
+        <div class="trigger" @click="popoverVisible = !popoverVisible">
         </div>
-        <div class="popover">
-            <div v-for="(item,index) in source" :key="index">
-                <cascader-item :sourceItem="item"></cascader-item>
-            </div>
+        <div class="popover-wrapper" v-if="popoverVisible">
+            <cascader-items class="popover" :items="source"
+            :height="popoverHeight"></cascader-items> 
         </div>
     </div>
 </template>
 <script>
-import CascaderItem from './cascader-item'
+import CascaderItems from './cascader-items'
 export default {
     name:'GvuiCascader',
     data(){
         return {
-
+            popoverVisible:false
         }
     },
     components:{
-        CascaderItem
+        CascaderItems
     },
     props:{
         source:{
             type:Array
+        },
+        popoverHeight:{
+            type:String
         }
     }
 }
@@ -32,7 +33,21 @@ export default {
 <style lang="scss" scoped>
     @import 'var';
     .cascader{
-        
+        position:relative;
+        .trigger{
+            border:1px solid red;
+            height:32px;
+            width:100px;
+            border:1px solid black;
+        }
+        .popover-wrapper{
+            position:absolute;
+            top:100%;
+            left:0;
+            background: white;
+            display: flex;
+            @extend .box-shadow;
+        }
     }
 </style>
 
