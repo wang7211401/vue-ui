@@ -74,7 +74,6 @@ export default {
        display: flex;
        justify-content: flex-start;
        align-items: center;
-       border:1px solid red;
        .left{
            height:100%;
            padding:.3em 0;
