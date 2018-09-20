@@ -4,14 +4,15 @@
             <div class="left">
                 <div class="label" v-for="(item,index) in items" 
                 :key="index"
-                @click="leftSelected = item">
+                @click="onClickLabel(item)">
                     {{item.name}}
                     <icon class="icon" v-if="item.children" name="right"></icon>
                 </div>
             </div>
             <div class="right" v-if="rightItems">
-                <gvui-cascader-items :items="rightItems"
-                :height="height">
+                <gvui-cascader-items :items="rightItems" ref="right"
+                :height="height"
+                :level="level + 1" :selected="selected" @update:selected="onUpdateSelected">
                 </gvui-cascader-items>
             </div>  
         </div>
@@ -27,23 +28,43 @@ export default {
         },
         height:{
             type:String
+        },
+        selected:{
+            type:Array,
+            default:() => ([])
+        },
+        level:{
+            type:Number,
+            default:0
         }
     },
     data(){
         return {
-            leftSelected:null
+            
         }
     },
     computed:{
         rightItems(){
-            if(this.leftSelected && this.leftSelected.children){
-                return this.leftSelected.children
+            let currentSelected = this.selected[this.level]
+            if(currentSelected && currentSelected.children){
+                return currentSelected.children
             }else{
                 return null
             }
         }
     },
-    components:{Icon}
+    components:{Icon},
+    methods:{
+        onClickLabel(item){
+            let copy = JSON.parse(JSON.stringify(this.selected));
+            copy[this.level] = item
+            this.$emit('update:selected',copy)
+        },
+        onUpdateSelected(newSelected){
+            console.log('newSelected',newSelected)
+            this.$emit('update:selected',newSelected)
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>
@@ -52,8 +73,8 @@ export default {
        display: flex;
        justify-content: flex-start;
        align-items: center;
+       border:1px solid red;
        .left{
-           border:1px solid red;
            height:100%;
            padding:.3em 0;
        }
