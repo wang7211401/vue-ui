@@ -7,6 +7,7 @@
             <cascader-items class="popover" :items="source"
             :height="popoverHeight"
             :selected="selected"
+            :loadData="loadData"
             @update:selected="onUpdateSelected"></cascader-items> 
         </div>
     </div>
@@ -81,9 +82,10 @@ export default {
         toUpdate.children = result;
         this.$emit("update:source", copy);
       };
-
-      this.loadData(lastItem, updateSource); // 回调:把别人传给我的函数调用一下
-      // 调回调的时候传一个函数,这个函数理论应该被调用
+      if(!lastItem.isleaf){
+        this.loadData && this.loadData(lastItem, updateSource); // 回调:把别人传给我的函数调用一下
+      }
+      
     }
   },
   computed: {

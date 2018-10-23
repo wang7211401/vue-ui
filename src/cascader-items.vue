@@ -5,8 +5,8 @@
                 <div class="label" v-for="(item,index) in items" 
                 :key="index"
                 @click="onClickLabel(item)">
-                    {{item.name}}
-                    <icon class="icon" v-if="item.children" name="right"></icon>
+                    <span class="name">{{item.name}}</span>
+                    <icon class="icon" v-if="rightArrowVisible(item)" name="right"></icon>
                 </div>
             </div>
             <div class="right" v-if="rightItems">
@@ -28,6 +28,9 @@ export default {
         },
         height:{
             type:String
+        },
+        loadData:{
+            type:Function
         },
         selected:{
             type:Array,
@@ -65,6 +68,10 @@ export default {
         },
         onUpdateSelected(newSelected){
             this.$emit('update:selected',newSelected)
+        },
+        rightArrowVisible(item){
+            console.log(this.loadData)
+            return this.loadData ? !item.isLeaf : item.children
         }
     }
 }
@@ -85,13 +92,22 @@ export default {
            border-left:1px solid $border-color-light;
        }
        .label{
-           padding:.3em 1em;
+           padding:.5em 1em;
            display: flex;
            align-items:center;
-           .icon{
-               margin-left:1em;
-               transform: scale(.5)
+           cursor: pointer;
+           &:hover{
+               background: $grey;
            }
+           > .name{
+               margin-right:1em;
+               user-select: none;
+           }
+           .icon{
+               margin-left:auto;
+               transform: scale(0.5)
+           }
+            
        }
     }
 </style>

@@ -17,6 +17,13 @@ function ajax(parentId = 0) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       let result = db.filter(item => item.parent_id == parentId);
+      result.forEach(node =>{
+        if(db.filter(item => item.parent_id === node.id).length > 0){
+          node.isLeaf = false
+        }else{
+          node.isLeaf = true
+        }
+      })
       resolve(result);
     }, 300);
   });
@@ -31,35 +38,36 @@ export default {
   data() {
     return {
       selected: [],
-      //   source: [
-      //     {
-      //       name: "浙江",
-      //       children: [
-      //         {
-      //           name: "杭州",
-      //           children: [{ name: "上城" }, { name: "下城" }, { name: "杭州" }]
-      //         },
-      //         {
-      //           name: "嘉兴",
-      //           children: [{ name: "南湖" }, { name: "秀洲" }, { name: "嘉善" }]
-      //         }
-      //       ]
-      //     },
-      //     {
-      //       name: "福建",
-      //       children: [
-      //         {
-      //           name: "福州",
-      //           children: [{ name: "鼓楼" }, { name: "台江" }, { name: "仓山" }]
-      //         }
-      //       ]
-      //     }
-      //   ],
+      // source: [
+      //   {
+      //     name: "浙江",
+      //     children: [
+      //       {
+      //         name: "杭州",
+      //         children: [{ name: "上城" }, { name: "下城" }, { name: "杭州" }]
+      //       },
+      //       {
+      //         name: "嘉兴",
+      //         children: [{ name: "南湖" }, { name: "秀洲" }, { name: "嘉善" }]
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     name: "福建",
+      //     children: [
+      //       {
+      //         name: "福州",
+      //         children: [{ name: "鼓楼" }, { name: "台江" }, { name: "仓山" }]
+      //       }
+      //     ]
+      //   }
+      // ],
       source: []
     };
   },
   created() {
     ajax().then(result => {
+      console.log(result)
       this.source = result;
     });
   },
@@ -67,14 +75,6 @@ export default {
     loadData({ id }, updateSource) {
       ajax(id).then(result => {
         updateSource(result);
-      });
-    },
-    xxx() {
-      ajax(this.selected[0].id).then(result => {
-        let lastLevelSelected = this.source.filter(
-          item => item.id === this.selected[0].id
-        )[0];
-        this.$set(lastLevelSelected, "children", result);
       });
     },
     onUpdateSource() {},
