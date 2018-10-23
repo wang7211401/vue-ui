@@ -14,12 +14,12 @@ import Cascader from "./cascader";
 import db from "./db";
 
 function ajax(parentId = 0) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-        let result = db.filter(item => item.parent_id == parentId);
-        resolve(result);
-        }, 300);
-    });
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      let result = db.filter(item => item.parent_id == parentId);
+      resolve(result);
+    }, 300);
+  });
 }
 
 export default {
@@ -77,8 +77,8 @@ export default {
         this.$set(lastLevelSelected, "children", result);
       });
     },
-    onUpdateSource(){},
-    onUpdateSelected(){}
+    onUpdateSource() {},
+    onUpdateSelected() {}
   }
 };
 </script>
