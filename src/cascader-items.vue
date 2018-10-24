@@ -6,7 +6,14 @@
                 :key="index"
                 @click="onClickLabel(item)">
                     <span class="name">{{item.name}}</span>
-                    <icon class="icon" v-if="rightArrowVisible(item)" name="right"></icon>
+                    <span class="icons">
+                        <template v-if="item.name === loadingItem.name">
+                            <icon class="loading" name="loading"></icon>
+                        </template>
+                        <template v-else>
+                            <icon class="next" v-if="rightArrowVisible(item)" name="right"></icon>
+                        </template>
+                    </span>
                 </div>
             </div>
             <div class="right" v-if="rightItems">
@@ -28,6 +35,10 @@ export default {
         },
         height:{
             type:String
+        },
+        loadingItem:{
+            type:Object,
+            default:() => ({})
         },
         loadData:{
             type:Function
@@ -104,9 +115,14 @@ export default {
                margin-right:1em;
                user-select: none;
            }
-           .icon{
+           .icons{
                margin-left:auto;
-               transform: scale(0.5)
+               .next{
+                   transform: scale(0.5)
+               }
+               .loading{
+                   animation: spin 2s infinite linear;
+               }
            }
             
        }

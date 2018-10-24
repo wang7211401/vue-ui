@@ -1,5 +1,5 @@
 <template>
-    <div class="cascader" ref="cascader">
+    <div class="cascader" ref="cascader" v-click-outside="close">
         <div class="trigger" @click="toggle">
             {{result || '&nbsp;'}}
         </div>
@@ -8,22 +8,26 @@
             :height="popoverHeight"
             :selected="selected"
             :loadData="loadData"
+            :loading-item="loadingItem"
             @update:selected="onUpdateSelected"></cascader-items> 
         </div>
     </div>
 </template>
 <script>
 import CascaderItems from "./cascader-items";
+import ClickOutside from './click-outside'
 export default {
   name: "GvuiCascader",
   data() {
     return {
-      popoverVisible: false
+      popoverVisible: false,
+      loadingItem:{}
     };
   },
   components: {
     CascaderItems
   },
+  directives:{ClickOutside},
   props: {
     source: {
       type: Array
@@ -42,21 +46,11 @@ export default {
     }
   },
   methods: {
-    onClickDocument(e){
-      let {target} = e
-      let {cascader} = this.$refs
-      if(cascader === target || cascader.contains(target)){ return }
-      this.close()
-    },
     close(){
       this.popoverVisible = false
-      document.removeEventListener('click',this.onClickDocument)
     },
     open(){
       this.popoverVisible = true
-      this.$nextTick(()=>{
-        document.addEventListener('click',this.onClickDocument)
-      })
     },
     toggle(){
       if(this.popoverVisible === true){
@@ -100,13 +94,15 @@ export default {
         }
       };
       let updateSource = result => {
+        this.loadingItem ={}
         let copy = JSON.parse(JSON.stringify(this.source));
         let toUpdate = complex(copy, lastItem.id);
         toUpdate.children = result;
         this.$emit("update:source", copy);
       };
-      if(!lastItem.isleaf){
+      if(!lastItem.isleaf && this.loadData){
         this.loadData && this.loadData(lastItem, updateSource); // 回调:把别人传给我的函数调用一下
+        this.loadingItem = lastItem
       }
       
     }
@@ -124,6 +120,7 @@ export default {
   position: relative;
   display: inline-block;
   .trigger {
+    background: white;
     height: $input-height;
     display: inline-flex;
     align-items: center;
@@ -139,6 +136,7 @@ export default {
     background: white;
     display: flex;
     margin-top: 8px;
+    z-index:1;
     z-index: 10;
     @extend .box-shadow;
   }
