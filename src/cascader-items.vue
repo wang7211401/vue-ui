@@ -18,6 +18,7 @@
             </div>
             <div class="right" v-if="rightItems">
                 <gvui-cascader-items :items="rightItems" ref="right"
+                :load-data="loadData"
                 :height="height"
                 :level="level + 1" :selected="selected" @update:selected="onUpdateSelected">
                 </gvui-cascader-items>
@@ -81,7 +82,6 @@ export default {
             this.$emit('update:selected',newSelected)
         },
         rightArrowVisible(item){
-            console.log(this.loadData)
             return this.loadData ? !item.isLeaf : item.children
         }
     }

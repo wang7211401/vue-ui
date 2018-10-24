@@ -6,15 +6,6 @@
               @update:selected="onUpdateSelected"
               :selected.sync="selected" :load-data="loadData"></g-cascader>
         </div>
-
-        <div style="padding:20px;">
-              <g-cascader :source.sync="source" popover-height="200px"
-              @update:source="onUpdateSource"
-              @update:selected="onUpdateSelected"
-              :selected.sync="selected" :load-data="loadData"></g-cascader>
-        </div>
-
-        {{selected.map(item=> item.name)}}
     </div>
 </template>
 <script>
@@ -77,7 +68,6 @@ export default {
   },
   created() {
     ajax().then(result => {
-      console.log(result)
       this.source = result;
     });
   },
