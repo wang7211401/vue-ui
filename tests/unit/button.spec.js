@@ -46,19 +46,15 @@ describe("Button.vue", () => {
     expect(getComputedStyle(icon).order).to.eq('1')
   })
   xit('设置 iconPosition 可以改变 order', () => {
-    const div = document.createElement('div')
-    document.body.appendChild(div)
-    const Constructor = Vue.extend(Button)
-    const vm = new Constructor({
+    const wrapper = mount(Button, {
       propsData: {
         icon: 'setting',
         iconPosition: 'right'
       }
-    }).$mount(div)
+    })
+    const vm = wrapper.vm
     const icon = vm.$el.querySelector('svg')
     expect(getComputedStyle(icon).order).to.eq('2')
-    vm.$el.remove()
-    vm.$destroy()
   })
   it('点击 button 触发 click 事件', () => {
     const wrapper = mount(Button, {
