@@ -1,9 +1,10 @@
 <template>
     <div>
         <g-cascader :source.sync="source" popover-height="200px"
-        @update:source="onUpdateSource"
-        @update:selected="onUpdateSelected"
-        :selected.sync="selected" :load-data="loadData"></g-cascader>
+            @update:source="onUpdateSource"
+            @update:selected="onUpdateSelected"
+            :selected.sync="selected" :load-data="loadData">
+        </g-cascader>
         <p>
             <strong>代码</strong>
         </p>

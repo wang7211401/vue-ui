@@ -5,5 +5,6 @@ title: Cascader
 
  使用方法
 
-
-<cascader-demos></cascader-demos>
+<ClientOnly>
+<cascader-demo-1 />
+</ClientOnly>
