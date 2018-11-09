@@ -11,14 +11,20 @@
 export default {
   name: "GvuiTabsHead",
   inject: ["eventBus"],
-  created() {
+  mounted() {
     this.eventBus.$on("update:selected", (item, vm) => {
+      this.updataLinePosition(vm)
+    });
+  },
+  methods:{
+    updataLinePosition(selectedVm){
       let {left:left2} = this.$refs.head.getBoundingClientRect();
-      let { width,left } = vm.$el.getBoundingClientRect();
+      let { width,left } = selectedVm.$el.getBoundingClientRect();
       this.$refs.line.style.width = `${width}px`;
       this.$refs.line.style.left = `${left -left2}px`;
-    });
+    }
   }
+
 };
 </script>
 <style lang="scss" scoped>
