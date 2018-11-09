@@ -1,18 +1,36 @@
 <template>
     <div id="app" style="padding:100px;">
-        <div style="padding:20px;">
-              <g-cascader :source.sync="source" popover-height="200px"
-              @update:source="onUpdateSource"
-              @update:selected="onUpdateSelected"
-              :selected.sync="selected" :load-data="loadData"></g-cascader>
+      <div style="padding:20px;">
+            <g-cascader :source.sync="source" popover-height="200px"
+            @update:source="onUpdateSource"
+            @update:selected="onUpdateSelected"
+            :selected.sync="selected" :load-data="loadData"></g-cascader>
+      </div>
+      <div style="padding-top: 16px;">
+        <h2>Toast</h2>
+        <p>
+          <strong>预览</strong>
+        </p>
+        <div>
+          <g-button @click="$toast('点击弹出提示')">上方弹出</g-button>
+          <g-button @click="$toast('点击弹出提示', {position:'middle'})">中间弹出</g-button>
+          <g-button @click="$toast('点击弹出提示', {position:'bottom'})">下方弹出</g-button>
         </div>
+        <p>
+          <strong>代码</strong>
+        </p>
+      </div>
     </div>
 </template>
 <script>
 import Button from "./button";
 import Cascader from "./cascader";
+import plugin from './plugin'
 import db from "./db";
 import {removeListener} from './click-outside'
+import Vue from 'vue'
+Vue.use(plugin)
+
 
 function ajax(parentId = 0) {
   return new Promise((resolve, reject) => {
@@ -63,7 +81,7 @@ export default {
       //     ]
       //   }
       // ],
-      source: []
+      source: [],
     };
   },
   created() {
@@ -99,5 +117,8 @@ html {
 }
 body {
   font-size: var(--font-size);
+}
+.gulu-toast {
+  z-index: 30 !important;
 }
 </style> 

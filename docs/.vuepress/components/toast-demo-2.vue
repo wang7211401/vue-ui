@@ -14,7 +14,7 @@
   </div>
 </template>
 <style>
-  .gulu-toast {
+  .g-toast {
     z-index: 30 !important;
   }
 </style>

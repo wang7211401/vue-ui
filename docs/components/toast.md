@@ -4,7 +4,9 @@ title: Toast
  # Toast
 
 
-<ClientOnly>
-    <toast-demo-1/>
-</ClientOnly>
 
+<toast-demo-1/>
+
+<toast-demo-2/>
+
+<toast-demo-3/>

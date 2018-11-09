@@ -1,6 +1,6 @@
 <template>
   <div style="padding-top: 16px;">
-    <h2>this.$toast</h2>
+    <h2>Toast</h2>
     <p>
       <strong>预览</strong>
     </p>
@@ -16,7 +16,7 @@
   </div>
 </template>
 <style>
-  .gulu-toast {
+  .g-toast {
     z-index: 30 !important;
   }
 </style>
@@ -26,7 +26,7 @@
   }
  </style>
 <script>
-  import plugin from '../../../src/plugin'
+  import plugin from '../../../src/plugin.js'
   import GButton from '../../../src/button'
   import Vue from 'vue'
    Vue.use(plugin)
