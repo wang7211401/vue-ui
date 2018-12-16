@@ -21,8 +21,6 @@ export default {
     },
     computed:{
         visible(){
-            console.log(`name：${this.name}`)
-            console.log(`reverse: ${this.reverse} ? '反向' : '正向'` )
             return this.selected === this.name
         }
     }
@@ -40,7 +38,7 @@ export default {
         height:100%;
     }
     .slide-enter-active,.slide-leave-active{
-        transition:all 3s;
+        transition:all .5s;
     }
     .slide-enter{
         transform:translateX(100%);
