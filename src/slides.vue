@@ -2,7 +2,6 @@
     <div class="g-slides" @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
     @touchstart="onTouchStart"
-    @touchmove="onTouchMove"
     @touchend="onTouchEnd">
         <div class="g-slides-window" ref="window">
             <div class="g-slides-wrapper">
@@ -60,6 +59,9 @@ export default {
     updated(){
         this.updateChildren()
     },
+    beforeDestroy(){
+        this.pause()
+    },
     computed:{
         selectedIndex(){
             let index = this.names.indexOf(this.selected) 
@@ -80,7 +82,6 @@ export default {
             }
             this.startTouch = e.touches[0]
         },
-        onTouchMove(){},
         onTouchEnd(e){
             let endTouch = e.changedTouches[0]
             let {clientX:x1,clientY:y1} = this.startTouch
