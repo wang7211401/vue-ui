@@ -8,17 +8,17 @@
             <div class="g-slides-wrapper">
                 <slot></slot>    
             </div>
-        </div>
-        <div class="g-slides-dots">
-            <span @click="onClickPrev">
+            <span @click="onClickPrev" class="prev">
                 <g-icon name="left"></g-icon>
             </span>
-            <span v-for="n in childrenLength" :class="{active:selectedIndex === n-1}"
-                @click="select(n-1)" :key="n">
-                {{n}}
-            </span>
-            <span @click="onClickNext">
+            <span @click="onClickNext" class="next">
                 <g-icon name="right"></g-icon>
+            </span>
+        </div>
+        <div class="g-slides-dots">
+            <span v-for="n in childrenLength" :class="{active:selectedIndex === n-1}"
+                @click="select(n-1)" :key="n" :data-index="n-1">
+                {{n}}
             </span>
         </div>
     </div>
@@ -36,6 +36,10 @@ export default {
         autoPlay:{
             type:Boolean,
             default:true
+        },
+        autoPlayDelay:{
+            type:Number,
+            default:3000
         }
     },
     data(){
@@ -48,7 +52,9 @@ export default {
     },
     mounted(){
         this.updateChildren()
-        this.playAutomatically()
+        if(this.autoPlay){
+            this.playAutomatically()
+        }
         this.childrenLength = this.items.length
     },
     updated(){
@@ -112,8 +118,9 @@ export default {
                 let index = this.names.indexOf(this.getSelected())
                 let newIndex = index + 1
                 this.select(newIndex)
-                this.timerId = setTimeout(run,300)
+                this.timerId = setTimeout(run,this.autoPlayDelay)
             }
+            this.timerId = setTimeout(run, this.autoPlayDelay)
         },
         pause(){
             window.clearTimeout(this.timerId)
@@ -121,15 +128,12 @@ export default {
         },
         select(newIndex){
             this.lastSelectedIndex = this.selectedIndex
-            console.log('names.length:' +  this.names.length)
             if(newIndex === -1){
                 newIndex = this.names.length -1
             }
             if(newIndex === this.names.length){
                 newIndex = 0
             }
-            console.log('newIndex')
-            console.log(newIndex)
             this.$emit('update:selected',this.names[newIndex])
         },
         getSelected(){
@@ -162,6 +166,37 @@ export default {
     .g-slides{
         &-window{
             overflow: hidden;
+            position: relative;
+            .prev{
+                position: absolute;
+                left: 20px;
+                top:50%;
+                transform: translateY(-50%);
+                width: 40px;
+                height: 40px;
+                border-radius:50%;
+                background: rgba(0,0,0,.5);
+                display: flex;
+                justify-content: center;
+                align-items:center;
+                color: #fff;
+                font-size:20px;
+            }
+            .next{
+                position: absolute;
+                right: 20px;
+                top:50%;
+                transform: translateY(-50%);
+                width: 40px;
+                height: 40px;
+                border-radius:50%;
+                background: rgba(0,0,0,.5);
+                display: flex;
+                justify-content: center;
+                align-items:center;
+                color: #fff;
+                font-size:20px;
+            }
         }
         &-wrapper{
             position: relative;
