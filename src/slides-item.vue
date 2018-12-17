@@ -7,6 +7,7 @@
 </template>
 <script>
 export default {
+    name:'GvuiSlidesItem',
     props:{
         name:{
             type:String,
