@@ -12,9 +12,9 @@
     </div>
 </template>
 <script>
-import Button from "../../../src/button";
-import Cascader from "../../../src/cascader";
-import db from "../../../src/db.js";
+import Button from "../../../src/button/button";
+import Cascader from "../../../src/cascader/cascader";
+import db from "../../../tests/fixtures/db.js";
 import {removeListener} from '../../../src/click-outside.js'
 
 

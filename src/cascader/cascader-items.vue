@@ -27,7 +27,7 @@
     </div>
 </template>
 <script>
-import Icon from './icon'
+import Icon from '../icon'
 export default {
     name:'GvuiCascaderItems',
     props:{
@@ -88,7 +88,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-    @import "var";
+    @import "../var";
     .cascaderItem{
        display: flex;
        justify-content: flex-start;
