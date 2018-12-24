@@ -1,7 +1,10 @@
 <template>
     <div class="g-sub-nav" :class="{active}" v-click-outside="close">
-        <span @click="onClick">
+        <span class="g-sub-nav-label" @click="onClick">
             <slot name="title"></slot>
+            <span class="g-sub-nav-icon" :class="{open}">
+                <g-icon name="right"></g-icon>
+            </span>
         </span>
         <div class="g-sub-nav-popover" v-show="open">
             <slot></slot>
@@ -11,8 +14,12 @@
 
 <script>
     import ClickOutside from '../click-outside'
+    import GIcon from '../icon'
     export default {
         name:'GvuiSubNav',
+        components:{
+            GIcon
+        },
         directives:{ClickOutside},
         inject:['root'],
         props:{
@@ -65,9 +72,12 @@
                 width:100%;
             }
         }
-        > span{
+        &-label{
             padding:10px 20px;
             display: block;
+        }
+        &-icon{
+            display: none;
         }
         &-popover{
             background: white;
@@ -83,9 +93,32 @@
             min-width:8em;
         }
     }
-    .g-sub-nav .g-sub-nav .g-sub-nav-popover{
-        top:0;
-        left:100%;
-        margin-left:8px;
+    .g-sub-nav .g-sub-nav{
+        &.active{
+            &::after{
+                display:none;
+            }
+        }
+        .g-sub-nav-popover{
+            top:0;
+            left:100%;
+            margin-left:8px;
+        }
+        .g-sub-nav-label{
+            display: flex;
+            align-items:center;
+            justify-content: space-between;
+        }
+        .g-sub-nav-icon{
+            transition:transform .25s;
+            display: inline-flex;
+            margin-left:1em;
+            svg{
+                fill:$light-color;
+            }
+            &.open{
+                transform: rotate(180deg)
+            }
+        }
     }
 </style>

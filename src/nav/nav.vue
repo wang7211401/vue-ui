@@ -70,8 +70,12 @@
 </script>
 
 <style scoped lang="scss">
+    @import "var";
     .g-nav{
         display: flex;
-        border:1px soldi red;
+        border-bottom:1px soldi $grey;
+        color:$color;
+        cursor: default;
+        user-select:none;
     }
 </style>
