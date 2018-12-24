@@ -93,7 +93,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "var";
+    @import "../var";
     .g-sub-nav{
         position:relative;
         &:not(.vertical){
@@ -128,6 +128,7 @@
             font-size:$font-size;
             color:$light-color;
             min-width:8em;
+            z-index: 2;
             &.vertical{
                 position:static;
                 border-radius:0;

@@ -34,7 +34,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "var";
+    @import "../var";
     .g-nav-item{
         padding:10px 20px;
         position: relative;

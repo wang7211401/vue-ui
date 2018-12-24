@@ -60,7 +60,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "var";
+    @import "../var";
     .g-nav{
         display: flex;
         border-bottom:1px soldi $grey;
