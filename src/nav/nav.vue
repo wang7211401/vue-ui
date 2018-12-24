@@ -1,5 +1,5 @@
 <template>
-    <div class="g-nav">
+    <div class="g-nav" :class="{vertical}">
         <slot></slot>
     </div>
 </template>
@@ -9,7 +9,8 @@
         name:'GvuiNav',
         provide(){
             return {
-                root:this
+                root:this,
+                vertical:this.vertical
             }
         },
         props:{
@@ -18,6 +19,10 @@
                 default:() => []
             },
             multiple:{
+                type:Boolean,
+                default:false
+            },
+            vertical:{
                 type:Boolean,
                 default:false
             }
@@ -77,5 +82,9 @@
         color:$color;
         cursor: default;
         user-select:none;
+        &.vertical{
+            flex-direction: column;
+            border:1px solid $grey;
+        }
     }
 </style>

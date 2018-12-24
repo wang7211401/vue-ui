@@ -6,9 +6,19 @@
                 <g-icon name="right"></g-icon>
             </span>
         </span>
-        <div class="g-sub-nav-popover" v-show="open">
-            <slot></slot>
-        </div>
+        <template v-if="vertical">
+            <transition @enter="enter" @leave="leave" @after-leave="afterLeave"
+            @after-enter="afterEnter">
+                <div class="g-sub-nav-popover" v-show="open" :class="{vertical}">
+                    <slot></slot>
+                </div>
+            </transition>
+        </template>
+        <template v-else>
+            <div class="g-sub-nav-popover" v-show="open" :class="{vertical}">
+                    <slot></slot>
+                </div>
+        </template>
     </div>
 </template>
 
@@ -21,7 +31,7 @@
             GIcon
         },
         directives:{ClickOutside},
-        inject:['root'],
+        inject:['root','vertical'],
         props:{
             name:{
                 type:String,
@@ -39,6 +49,30 @@
             }
         },
         methods:{
+            enter(el,done){
+                let {height} = el.getBoundingClientRect();
+                el.style.height = 0
+                el.getBoundingClientRect()
+                el.style.height = `${height}px`
+                el.addEventListener('transitionend',()=>{
+                    done()
+                })
+            },
+            afterEnter(el){
+                el.style.height = "auto"
+            },
+            leave(el,done){
+                let {height} = el.getBoundingClientRect()
+                el.style.height = `${height}px`
+                el.getBoundingClientRect()
+                el.style.height = 0
+                el.addEventListener('transitionend',()=>{
+                    done()
+                })
+            },
+            afterLeave(el){
+                el.style.height = 'auto';
+            },
             onClick(){
                 this.open = !this.open
             },
@@ -80,6 +114,7 @@
             display: none;
         }
         &-popover{
+            transition:height .25s;
             background: white;
             position: absolute;
             top:100%;
@@ -91,7 +126,13 @@
             font-size:$font-size;
             color:$light-color;
             min-width:8em;
-        }
+            &.vertical{
+                position:static;
+                border-radius:0;
+                border:none;
+                box-shadow:none;
+            }
+        } 
     }
     .g-sub-nav .g-sub-nav{
         &.active{
