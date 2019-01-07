@@ -36,5 +36,8 @@ module.exports = {
             }
         ],
         displayAllHeaders: true
+    },
+    scss:{
+        includePath:[path.join(__dirname,'../../styles')]
     }
 }
