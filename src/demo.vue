@@ -1,65 +1,83 @@
 <template>
     <div id="app">
-      <g-nav :selected.sync="selected" vertical>
-        <g-nav-item name="home">首页</g-nav-item>
-        <g-sub-nav name="about">
-          <template slot="title">关于</template>
-          <g-nav-item name="culture">企业文化</g-nav-item>
-          <g-nav-item name="developers">开发团队</g-nav-item>
-          <g-sub-nav name="contact">
-            <template slot="title">联系方式</template>
-            <g-nav-item name="wechat">微信</g-nav-item>
-            <g-nav-item name="qq">QQ</g-nav-item>
-            <g-sub-nav name="phone">
-              <template slot="title">手机</template>
-              <g-nav-item name="cm">移动</g-nav-item>
-              <g-nav-item name="cu">联通</g-nav-item>
-              <g-nav-item name="cn">电信</g-nav-item>
-            </g-sub-nav>
-          </g-sub-nav>
-        </g-sub-nav>
-        <g-nav-item name="hire">招聘</g-nav-item>
-      </g-nav>
-      <p>用户选中了 {{selected}}</p>
+       <div style="margin-top:200px;">
+            <g-popover>
+                <g-button>上方弹出</g-button>
+                <template slot="content">
+                    弹出内容
+                </template>
+            </g-popover>
 
-      <g-nav :selected.sync="selected">
-        <g-nav-item name="home">首页</g-nav-item>
-        <g-sub-nav name="about">
-          <template slot="title">关于</template>
-          <g-nav-item name="culture">企业文化</g-nav-item>
-          <g-nav-item name="developers">开发团队</g-nav-item>
-          <g-sub-nav name="contact">
-            <template slot="title">联系方式</template>
-            <g-nav-item name="wechat">微信</g-nav-item>
-            <g-nav-item name="qq">QQ</g-nav-item>
-            <g-sub-nav name="phone">
-              <template slot="title">手机</template>
-              <g-nav-item name="cm">移动</g-nav-item>
-              <g-nav-item name="cu">联通</g-nav-item>
-              <g-nav-item name="cn">电信</g-nav-item>
-            </g-sub-nav>
-          </g-sub-nav>
-        </g-sub-nav>
-        <g-nav-item name="hire">招聘</g-nav-item>
-      </g-nav>
+            <g-popover position="bottom">
+                <g-button>下方弹出</g-button>
+                <template slot="content">
+                    弹出内容
+                </template>
+            </g-popover>
+
+            <g-popover position="left">
+                <g-button>左边弹出</g-button>
+                <template slot="content">
+                    弹出内容
+                </template>
+            </g-popover>
+
+            <g-popover position="right">
+                <g-button>右边弹出</g-button>
+                <template slot="content">
+                    弹出内容
+                </template>
+            </g-popover>
+            
+            <g-popover position="top">
+                <g-button>弹出内容点击关闭</g-button>
+                <template slot="content" slot-scope="{close}">
+                    弹出内容 | <g-button @click="close">关闭</g-button>
+                </template>
+            </g-popover>
+        </div>
+        <div>
+            <h2>将触发方式改为 hover</h2>
+            <p>预览</p>
+            <g-popover trigger="hover">
+                <g-button>上方弹出</g-button>
+                <template slot="content">
+                    弹出内容
+                </template>
+            </g-popover>
+
+            <g-popover position="bottom" trigger="hover">
+                <g-button>下方弹出</g-button>
+                <template slot="content">
+                    弹出内容
+                </template>
+            </g-popover>
+
+            <g-popover position="left" trigger="hover">
+                <g-button>左边弹出</g-button>
+                <template slot="content">
+                    弹出内容
+                </template>
+            </g-popover>
+
+            <g-popover position="right" trigger="hover">
+                <g-button>右边弹出</g-button>
+                <template slot="content">
+                    弹出内容
+                </template>
+            </g-popover>
+        </div>
     </div>
 </template>
 <script>
-import GNav from "./nav/nav.vue";
-import GNavItem from "./nav/nav-item.vue";
-import GSubNav from "./nav/sub-nav.vue";
+import Popover from "./popover.vue";
+import Button from "./button/button.vue";
 
 export default {
   name: "demo",
   components: {
-    GNav,
-    GNavItem,
-    GSubNav
-  },
-  data() {
-    return {
-      selected: 'culture'
-    };
+    "g-popover": Popover,
+    "g-button": Button,
   }
 };
 </script>
@@ -68,5 +86,17 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+.wrapper{
+  /* margin:40px; */
+}
+.box{
+  width:100%;
+  height:350px;
+  background: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:30px;
 }
 </style> 
