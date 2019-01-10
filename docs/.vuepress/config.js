@@ -1,3 +1,4 @@
+const path = require('path');
 module.exports = {
     base: '/vue-ui/',
     title: 'Gvui',
@@ -31,7 +32,8 @@ module.exports = {
                     '/components/collapse',
                     '/components/cascader',
                     '/components/slides',
-                    '/components/nav'
+                    '/components/nav',
+                    '/components/validate'
                 ]
             }
         ],
