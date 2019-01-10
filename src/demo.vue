@@ -1,92 +1,87 @@
 <template>
-    <div id="app">
-       <div style="margin-top:200px;">
-            <g-popover>
-                <g-button>上方弹出</g-button>
-                <template slot="content">
-                    弹出内容
-                </template>
-            </g-popover>
-
-            <g-popover position="bottom">
-                <g-button>下方弹出</g-button>
-                <template slot="content">
-                    弹出内容
-                </template>
-            </g-popover>
-
-            <g-popover position="left">
-                <g-button>左边弹出</g-button>
-                <template slot="content">
-                    弹出内容
-                </template>
-            </g-popover>
-
-            <g-popover position="right">
-                <g-button>右边弹出</g-button>
-                <template slot="content">
-                    弹出内容
-                </template>
-            </g-popover>
-            
-            <g-popover position="top">
-                <g-button>弹出内容点击关闭</g-button>
-                <template slot="content" slot-scope="{close}">
-                    弹出内容 | <g-button @click="close">关闭</g-button>
-                </template>
-            </g-popover>
-        </div>
-        <div>
-            <h2>将触发方式改为 hover</h2>
-            <p>预览</p>
-            <g-popover trigger="hover">
-                <g-button>上方弹出</g-button>
-                <template slot="content">
-                    弹出内容
-                </template>
-            </g-popover>
-
-            <g-popover position="bottom" trigger="hover">
-                <g-button>下方弹出</g-button>
-                <template slot="content">
-                    弹出内容
-                </template>
-            </g-popover>
-
-            <g-popover position="left" trigger="hover">
-                <g-button>左边弹出</g-button>
-                <template slot="content">
-                    弹出内容
-                </template>
-            </g-popover>
-
-            <g-popover position="right" trigger="hover">
-                <g-button>右边弹出</g-button>
-                <template slot="content">
-                    弹出内容
-                </template>
-            </g-popover>
-        </div>
-    </div>
+   <div class="form-wrapper">
+        <form class="form" @submit.prevent="onSubmit">
+            <h1>登录</h1>
+            <demo-form-row lable="邮箱" :error="errors.email">
+                <g-input type="text" v-model="user.email"></g-input>
+            </demo-form-row>
+            <demo-form-row lable="密码" :error="errors.password">
+                <g-input type="password" v-model="user.password"></g-input>
+            </demo-form-row>
+            <div>
+                <g-button class="ok" type="submit">提交</g-button>
+            </div>
+        </form>
+   </div>
 </template>
 <script>
-import Popover from "./popover.vue";
-import Button from "./button/button.vue";
+import GButton from "./button/button.vue";
+import GInput from "./input.vue";
+import DemoFormRow from "./demo-form-row.vue";
+import formMixin from './form-mixin'
 
 export default {
   name: "demo",
   components: {
-    "g-popover": Popover,
-    "g-button": Button,
-  }
+    DemoFormRow,
+    GButton,
+    GInput
+  },
+  mixins:[formMixin],
+  data(){
+      return {
+        user:{
+            email:'',
+            password:''
+        },
+        rules:[
+            {
+                key:'email',pattern:'email',required:true
+            },
+            {
+                key:'password',minLength:6,required:true
+            }
+        ]
+      }
+  },
+  methods: {
+      onSubmit(){
+          this.validate(this.user)
+          console.log(this.errors)
+      }
+  },
+
 };
 </script>
+
 <style>
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+body{
+    background:#888;
+}
+</style>
+<style scoped lang="scss">
+.form{
+    background:white;
+    padding:24px;
+    border-radius:8px;
+    margin-top:36px;
+    min-height:60vh;
+    &-wrapper{
+        display:flex;
+        justify-content:center;
+    }
+    .ok{
+        display:block;
+        width:100%;
+        margin-top:24px;
+    }
+}
+
 .wrapper{
   /* margin:40px; */
 }
