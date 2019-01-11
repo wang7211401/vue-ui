@@ -1,20 +1,22 @@
 <template>
-    <div class="g-pager">
-        <span class="g-pager-nav prev" :class="{disabled:currentPage === 1}">
+    <div class="g-pager" :class="{hide:hideIfOnePage === true && totalPage <=1}">
+        <span class="g-pager-nav prev" :class="{disabled:currentPage === 1}"
+        @click="onClickPage(currentPage-1)">
             <g-icon name="left"></g-icon>
         </span>
-        <template v-for="page in pages">
+        <template v-for="(page,index) in pages">
             <template v-if="page === currentPage">
-                <span class="g-pager-item current">{{page}}</span>
+                <span class="g-pager-item current" :key="index">{{page}}</span>
             </template>
             <template v-else-if="page === '...'">
-                <g-icon class="g-pager-separtor" name="dots"></g-icon>
+                <g-icon class="g-pager-separtor" name="dots" :key="index"></g-icon>
             </template>
             <template v-else>
-                <span class="g-pager-item other">{{page}}</span>
+                <span class="g-pager-item other" :key="index" @click="onClickPage(page)">{{page}}</span>
             </template>
         </template>
-        <span class="g-pager-nav next" :class="{disabled:currentPage === totalPage}">
+        <span class="g-pager-nav next" :class="{disabled:currentPage === totalPage}"
+        @click="onClickPage(currentPage+1)">
             <g-icon name="right"></g-icon>
         </span>
     </div>
@@ -40,23 +42,28 @@ export default {
             default:true
         }
     },
-    data(){
-        let pages = unique([1,this.totalPage,
-        this.currentPage,
-        this.currentPage - 1,
-        this.currentPage -2,
-        this.currentPage + 1,
-        this.currentPage + 2]
-        .filter(n => n >= 1 && n <= this.totalPage)
-        .sort((a,b) => a-b))
-        .reduce((prev,current,index,array)=>{
-            prev.push(current)
-            array[index + 1] !== undefined && array[index + 1] - array[index] > 1 && prev.push('...')
-            return prev
-        },[])
-
-        return {
-            pages
+    computed:{
+        pages(){
+            return unique([1,this.totalPage,
+                this.currentPage,
+                this.currentPage - 1,
+                this.currentPage -2,
+                this.currentPage + 1,
+                this.currentPage + 2]
+                .filter(n => n >= 1 && n <= this.totalPage)
+                .sort((a,b) => a-b))
+                .reduce((prev,current,index,array)=>{
+                    prev.push(current)
+                    array[index + 1] !== undefined && array[index + 1] - array[index] > 1 && prev.push('...')
+                    return prev
+                },[])
+        }
+    },
+    methods:{
+        onClickPage(n){
+            if(n >=1 && n <= this.totalPage){
+                this.$emit('update:currentPage',n)
+            } 
         }
     }
 }
@@ -79,6 +86,8 @@ function unique(array){
         $width:20px;
         $height:20px;
         $font-size:12px;
+        user-select: none;
+        &.hide{display: none;}
         &-separator{
             width:$width;
             font-size:$font-size;
@@ -112,7 +121,9 @@ function unique(array){
             width:$width;
             border-radius:$border-radius;
             font-size:$font-size;
+            cursor: pointer;
             &.disabled{
+                cursor: not-allowed;
                 svg{
                     fill:darken($grey, 30%);
                 }
