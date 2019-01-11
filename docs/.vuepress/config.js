@@ -33,7 +33,8 @@ module.exports = {
                     '/components/cascader',
                     '/components/slides',
                     '/components/nav',
-                    '/components/validate'
+                    '/components/validate',
+                    '/components/pager'
                 ]
             }
         ],
