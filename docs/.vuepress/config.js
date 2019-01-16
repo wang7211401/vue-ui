@@ -9,8 +9,7 @@ module.exports = {
             { text: '安装', link: '/install/' },
             { text: 'Github', link: 'https://github.com/wang7211401/vue-ui' },
         ],
-        sidebar: [
-            {
+        sidebar: [{
                 title: '入门',
                 collapsable: false,
                 children: [
@@ -34,13 +33,14 @@ module.exports = {
                     '/components/slides',
                     '/components/nav',
                     '/components/validate',
-                    '/components/pager'
+                    '/components/pager',
+                    '/components/table'
                 ]
             }
         ],
         displayAllHeaders: true
     },
-    scss:{
-        includePath:[path.join(__dirname,'../../styles')]
+    scss: {
+        includePath: [path.join(__dirname, '../../styles')]
     }
 }

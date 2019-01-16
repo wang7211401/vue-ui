@@ -237,6 +237,7 @@ export default {
 @import "var";
 $grey:darken($grey,10%);
 .g-table{
+    display: table;
     width:100%;
     border-collapse: collapse;
     border-spacing: 0;
