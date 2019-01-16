@@ -8,7 +8,13 @@
                     </th>
                     <th v-if="numberVisible">#</th>
                     <th v-for="column in columns" :key="column.field">
-                        {{column.text}}
+                        <div class="g-table-header">
+                            {{column.text}}
+                            <span v-if="column.field in orderBy" class="g-table-sorter" @click="changeOrderBy(column.field)">
+                                <g-icon name="asc" :class="{active:orderBy[column.field] === 'asc'}"></g-icon>
+                                <g-icon name="desc" :class="{active:orderBy[column.field] === 'desc'}"></g-icon>
+                            </span>    
+                        </div>  
                     </th>
                 </tr>
             </thead>
@@ -27,12 +33,27 @@
                 </tr>
             </tbody>
         </table>
+        <div v-if="loading" class="g-table-loading">
+            <g-icon name="loading"></g-icon>
+        </div>
     </div>
 </template>
 <script>
+import GIcon from './icon'
 export default {
     name:'GTable',
+    components:{
+        GIcon
+    },
     props:{
+        orderBy:{
+            type:Object,
+            default:() => ({})
+        },
+        loading:{
+            type:Boolean,
+            default:false
+        },
         striped:{
             type:Boolean,
             default:true
@@ -92,6 +113,18 @@ export default {
         }
     },
     methods:{
+        changeOrderBy(key){
+            const copy = JSON.parse(JSON.stringify(this.orderBy))
+            let oldValue = copy[key]
+            if(oldValue === 'asc'){
+                copy[key] = 'desc'
+            }else if(oldValue === 'desc'){
+                copy[key] = true
+            }else{
+                copy[key] = 'asc'
+            }
+            this.$emit('update:orderBy',copy)
+        },
         inSelectedItems(item){
             return this.selectedItems.filter(i => i.id === item.id).length > 0
         },
@@ -146,6 +179,43 @@ $grey:darken($grey,10%);
                     background: lighten($grey, 10%);
                 }
             }
+        }
+    }
+    &-sorter{
+        display: inline-flex;
+        flex-direction: column;
+        margin:0 4px;
+        cursor: pointer;
+        svg{
+            width:10px;
+            height:10px;
+            fill:$grey;
+            &.active{
+                fill:red;
+            }
+        }
+    }
+    &-header{
+        display: flex;
+        align-items:center;
+    }
+    &-wrapper{
+        position:relative;
+    }
+    &-loading{
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        background: rgba(255,255,255,.8);
+        svg{
+            width:50px;
+            height:50px;
+            @include spin;
         }
     }
 }
