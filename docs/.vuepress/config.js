@@ -34,7 +34,8 @@ module.exports = {
                     '/components/nav',
                     '/components/validate',
                     '/components/pager',
-                    '/components/table'
+                    '/components/table',
+                    '/components/uploader'
                 ]
             }
         ],
