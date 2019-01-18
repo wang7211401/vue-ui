@@ -61,6 +61,7 @@ export default {
         },
         putBackContent(){
             const {contentWrapper,trigger} = this.$refs
+            if(!contentWrapper){return}
             document.body.appendChild(contentWrapper)
         },
         positionContent(){
