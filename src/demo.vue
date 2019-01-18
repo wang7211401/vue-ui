@@ -1,10 +1,11 @@
 <template>
   <div style="margin:20px;">
     <div>只能上传 300kb 以内的 png、jpeg</div>
-    <g-uploader accept="image/*" method="POST" action="https://node-file.herokuapp.com/upload" name="file"
-     :parseResponse="parseResponse" :file-list.sync="fileList" @update:fileList="yyy">
+    <g-uploader accept="image/*" method="POST" action="http://127.0.0.1:3000/upload" name="file"
+     :parseResponse="parseResponse" :file-list.sync="fileList" @update:fileList="yyy"
+     @error="alert" :size-limit="2*1024*1024" multiple >
       <g-button icon="upload">上传</g-button>
-     </g-uploader>
+    </g-uploader>
   </div>
    
 </template>
@@ -19,18 +20,21 @@ export default {
   },
   data(){
     return {
-      fileList:[]
+      fileList:[],
+      error:''
     }
   },
   methods:{
+    alert(error){
+      window.alert(error || '上传失败')
+    },
     parseResponse(response){
       let object = JSON.parse(response)
-      let url = `https://node-file.herokuapp.com/preview/${object.filename}`
+      let url = `http://127.0.0.1:3000/preview/${object.id}`
       return url
     },
-    yyy(fileList){
-      console.log('fileList')
-      console.log(fileList)
+    yyy(newFileList){
+      this.fileList = newFileList
     }
   }
 };

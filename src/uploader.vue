@@ -24,6 +24,7 @@
 </template>
 <script>
 import GIcon from './icon'
+import http from './http'
 export default {
     name:'GUploader',
     components:{GIcon},
@@ -47,6 +48,17 @@ export default {
         fileList:{
             type:Array,
             default:() => []
+        },
+        sizeLimit:{
+            type:Number
+        },
+        accept:{
+            type:String,
+            default:'image/*'
+        },
+        multiple:{
+            type:Boolean,
+            default:false
         }
     },
     data(){
@@ -57,8 +69,8 @@ export default {
     methods:{
         onClickUpload(){
             let input = this.createInput()
-            input.addEventListener('change',()=>{
-                this.updateFile(input.files[0])
+            input.addEventListener('change',(e)=>{
+                this.updateFiles(input.files)
                 input.remove()
             })
             input.click()
@@ -72,11 +84,23 @@ export default {
                 this.$emit('update:fileList',copy)
             }
         },
-        beforeUploadFile(file,newName,url){
-            let {size,type} = file
-            this.$emit('update:fileList',[...this.fileList,{name:newName,type,size,status:'uploading'}])
+        beforeUploadFiles(rawFiles,newNames){
+            rawFiles = Array.from(rawFiles)
+            for(let i=0;i<rawFiles.length;i++){
+                let {size,type} = rawFiles[i]
+                if(size > this.sizeLimit){
+                    this.$emit('error','文件大于2MB')
+                    return false
+                }
+            }
+            let x = rawFiles.map((rawFile,i)=>{
+                let {type,size} = rawFile
+                return {name:newNames[i],type,size,status:'uploading'}
+            })
+            this.$emit('update:fileList',[...this.fileList,...x])
+            return true
         },
-        afterUploadFile(newName,url){
+        afterUploadFiles(newName,url){
             let file = this.fileList.filter(f => f.name === newName)[0]
             let index = this.fileList.indexOf(file)
             let fileCopy = JSON.parse(JSON.stringify(file))
@@ -85,22 +109,32 @@ export default {
             let fileListCopy = [...this.fileList]
             fileListCopy.splice(index,1,fileCopy)
             this.$emit('update:fileList',fileListCopy)
+            this.$emit('uploaded')
         },
-        updateFile(file){
-            let {name,size,type} = file
-            let newName = this.generateName(name)
-            this.beforeUploadFile(file,newName)
-            let formData = new FormData()
-            formData.append(this.name,file)
-            this.doUploadFile(formData,(response)=>{
-                let url = this.parseResponse(response)
-                this.url = url
-                this.afterUploadFile(newName,url)
-            },()=>{
-                this.uploadError(newName)
-            })
+        updateFiles(rawFiles){
+            let newNames = []
+            for(let i=0;i<rawFiles.length;i++){
+                let {name,size,type} = rawFiles[i]
+                let newName = this.generateName(name)
+                newNames[i] = newName
+            }
+            if(!this.beforeUploadFiles(rawFiles,newNames)){ return }
+            
+            for(let i=0;i<rawFiles.length;i++){
+                let rawFile = rawFiles[i]
+                let newName = newNames[i]
+                let formData = new FormData()
+                formData.append(this.name,rawFile)
+                this.doUploadFiles(formData,(response)=>{
+                    let url = this.parseResponse(response)
+                    this.url = url
+                    this.afterUploadFiles(newName,url)
+                },(xhr)=>{
+                    this.uploadError(xhr,newName)
+                })
+            }   
         },
-        uploadError(newName){
+        uploadError(xhr,newName){
             let file = this.fileList.filter(f => f.name === newName)[0]
             let index = this.fileList.indexOf(file)
             let fileCopy = JSON.parse(JSON.stringify(file))
@@ -108,6 +142,11 @@ export default {
             let fileListCopy = [...this.fileList]
             fileListCopy.splice(index,1,fileCopy)
             this.$emit('update:fileList',fileListCopy)
+            let error = ''
+            if(xhr.status === 0){
+                error = '网络无法连接'
+            }
+            this.$emit('error',error)
         },
         generateName(name){
             while(this.fileList.filter(f => f.name === name).length > 0){
@@ -118,22 +157,15 @@ export default {
             }
             return name
         },
-        doUploadFile(formData,success,fail){
-            let xhr = new XMLHttpRequest()
-            xhr.open(this.method,this.action)
-            xhr.onload = ()=>{
-                success(xhr.response)
-                // if(Math.random() > 0.5){
-                //     success(xhr.response)
-                // }else{
-                //     fail()
-                // }
-            }
-            xhr.send(formData)
+        doUploadFiles(formData,success,fail){
+           http[this.method.toLowerCase()](this.action,{success,fail,data:formData})
         },
         createInput(){
+            this.$refs.temp.innerHTML = ''
             let input = document.createElement('input');
             input.type="file"
+            input.accept = this.accept
+            input.multiple = this.multiple
             this.$refs.temp.appendChild(input)
             return input
         }
