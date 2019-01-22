@@ -1,8 +1,8 @@
 {
     "name": "gvui",
-    "version": "0.1.0",
+    "version": "0.0.4",
     "description": "一个基于Vue的UI框架",
-    "private": true,
+    "main": "dist/gvui.umd.min.js",
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build --target lib --name gvui src/index.js",
