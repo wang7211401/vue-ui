@@ -3,7 +3,11 @@
         <slot></slot>
     </div>
 </template>
-
+<script>
+export default {
+    name:'GvuiContent'
+}
+</script>
 <style lang="scss" scoped>
 .g-content{
     flex-grow:1;

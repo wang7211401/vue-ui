@@ -3,6 +3,11 @@
         <slot></slot>    
     </div>
 </template>
+<script>
+export default {
+    name:'GvuiHeader'
+}
+</script>
 <style lang="scss" scoped>
 
 </style>
