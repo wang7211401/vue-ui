@@ -1,20 +1,21 @@
 <template>
     <div>
-      <g-table :columns="columns" :data-source="dataSource" bordered compact :striped="false" numberVisible></g-table>
+      <g-table :data-source="dataSource" bordered compact :striped="false" numberVisible>
+        <g-table-column text="姓名" field="name" :width="100"></g-table-column>
+        <g-table-column text="分数" field="score"></g-table-column>
+      </g-table>
     </div>
 </template>
 <script>
 import GTable from "../../../src/table";
+import GTableColumn from "../../../src/table-column";
 export default {
   components: {
-    GTable
+    GTable,
+    GTableColumn
   },
   data(){
     return {
-      columns:[
-        {text:'姓名',field:'name',width:100},
-        {text:'分数',field:'score'}
-      ],
       dataSource:[
         {id:1,name:'张三',score:99,description:'描述内容'},
         {id:2,name:'李四',score:98,description:'描述内容'},

@@ -1,28 +1,32 @@
 <template>
     <div>
-      <g-table :columns="columns" :data-source="dataSource" bordered :selected-items.sync="selected" :order-by.sync="orderBy"
+      <g-table :data-source="dataSource" bordered :selected-items.sync="selected" :order-by.sync="orderBy"
       @update:orderBy="x" :loading="loading" :height="400" expend-field="description" checkable numberVisible>
+         <g-table-column text="姓名" field="name" :width="100">
+          <template slot-scope="props">
+            <a :href="`/users/${props.value}`">{{props.value}}</a>
+          </template>
+        </g-table-column>
+        <g-table-column text="分数" field="score"></g-table-column>
         <template slot-scope="xxx">
-          <button @click="edit(xxx.item)">编辑</button>
-          <button @click="view(xxx.item)">查看</button>
-          <button @click="del(xxx.item)">删除</button>
+            <button @click="edit(xxx.item)">编辑</button>
+            <button @click="view(xxx.item)">查看</button>
+            <button @click="del(xxx.item)">删除</button>
         </template>
       </g-table>
     </div>
 </template>
 <script>
 import GTable from "../../../src/table";
+import GTableColumn from "../../../src/table-column";
 export default {
   components: {
-    GTable
+    GTable,
+    GTableColumn
   },
   data(){
     return {
       selected:[],
-      columns:[
-        {text:'姓名',field:'name',width:100},
-        {text:'分数',field:'score'}
-      ],
       orderBy:{
         score:'desc'
       },
