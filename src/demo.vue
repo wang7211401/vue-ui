@@ -1,5 +1,6 @@
 <template>
 <div>
+  {{selected}}
  <div style="margin:20px;">   
     <g-table :data-source="dataSource" bordered :selected-items.sync="selected" :order-by.sync="orderBy"
     @update:orderBy="x" :loading="loading" :height="400" expend-field="description" checkable numberVisible>
@@ -38,10 +39,6 @@ export default {
   data(){
     return {
       selected:[],
-      // columns:[
-      //   {text:'姓名',field:'name',width:100},
-      //   {text:'分数',field:'score'}
-      // ],
       orderBy:{
         score:'desc'
       },

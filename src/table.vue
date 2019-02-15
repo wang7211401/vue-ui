@@ -128,8 +128,9 @@ export default {
         }
     },
     mounted(){
+        console.log(this.$slots.default)
         this.columns = this.$slots.default.map(node =>{
-            console.log(node)
+            console.log('node',node)
             
             let {text,field,width} = node.componentOptions.propsData
             let render = node.data.scopedSlots && node.data.scopedSlots.default
