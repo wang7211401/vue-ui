@@ -4,7 +4,7 @@
   <g-scroll style="width:300px;height:400px;">
     <p>1</p>
     <p>2</p>
-    <p>3</p>
+    <p id="test2">3</p>
     <p>4</p>
     <p>5</p>
     <p>6</p>
@@ -12,6 +12,7 @@
     <p>8</p>
     <p>9</p>
     <p>10</p>
+    <img src="https://i.loli.net/2019/02/22/5c6f618a82fcf.jpg" alt="">
     <p>11</p>
     <p>12</p>
     <p>13</p>
@@ -152,6 +153,13 @@ export default {
     }
   },
   mounted(){
+    setTimeout(()=>{
+      let img = document.createElement('img')
+      img.src = "https://i.loli.net/2019/02/22/5c6f618a82fcf.jpg"
+      img.height = 1000
+      window.test2.appendChild(img)
+    },5000)
+
     let test = document.querySelector('#test');
     let startPosition
     let endPosition

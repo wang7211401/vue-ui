@@ -1,7 +1,7 @@
 <template>
     <div ref="parent" class="g-scroll-wrapper" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave" @wheel="onWheel"
         @mousemove="onMouseMove">
-        <div ref="child" class="g-scroll" :style="{transform:`trnaslateY(${this.contentY}px)`}">
+        <div ref="child" class="g-scroll" :style="{transform:`translateY(${this.contentY}px)`}">
             <slot></slot>
         </div>
         <div class="g-scroll-track" v-show="scrollBarVisible">
@@ -34,13 +34,37 @@ export default {
         this.parentHeight = this.$refs.parent.getBoundingClientRect().height
         this.childHeight = this.$refs.child.getBoundingClientRect().height
         this.updateScrollBar()
+        this.listenToRemoteResources()
+        this.listenToDomChange()
     },
     computed:{
         maxScrollHeight(){
             return this.parentHeight - this.barHeight
         }
     },
+    updated(){
+        this.childHeight = this.$refs.child.getBoundingClientRect().height
+    },
     methods:{
+        listenToRemoteResources(){
+            let tags = this.$refs.parent.querySelectorAll('img,video,audio')
+            Array.from(tags).map((tag) =>{
+                if(tag.hasAttribute('data-g-listened')){return}
+                tag.setAttribute('data-g-listened','yes')
+                tag.addEventListener('load',()=>{
+                    this.updateScrollBar()
+                })
+            })
+        },
+        listenToDomChange(){
+            const targetNode = this.$refs.child
+            const config = {attributes:true,childList:true,subtree:true}
+            const callback = ()=>{
+                this.listenToRemoteResources()
+            }
+            const observer = new MutationObserver(callback)
+            observer.observe(targetNode,config)
+        },
         listenToDocument(){
             document.addEventListener('mousemove',e=> this.onMouseMoveScrollbar(e))
             document.addEventListener('mouseup',e => this.onMouseUpScrollbar(e))
@@ -81,11 +105,9 @@ export default {
             return maxHeight
         },
         updateScrollBar(){
-            let parentHeight = this.parentHeight
-            let childHeight = this.childHeight
-            this.barHeight = parentHeight * parentHeight / childHeight
+            this.barHeight = this.parentHeight * this.parentHeight / this.childHeight
             this.$refs.bar.style.height = this.barHeight + 'px'
-            this.scrollBarY = -parentHeight * this.contentY / childHeight
+            this.scrollBarY = -this.parentHeight * this.contentY / this.childHeight
             this.$refs.bar.style.transform = `translateY(${this.scrollBarY}px)`;
         },
         onMouseEnter(){
@@ -150,7 +172,8 @@ export default {
             width:14px;
             height:100%;
             background: #fafafa;
-            border:1px solid #e8e7e8;
+            border-left:1px solid #e8e7e8;
+            opacity: 0.9;
         }
         &-bar{
             position: absolute;
