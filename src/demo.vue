@@ -1,20 +1,26 @@
 <template>
 <div class="page" style="position:relative;">
-  <g-date-picker></g-date-picker>
+  <g-date-range-picker :value="d" @input="d = $event" :scope="scope"></g-date-range-picker>
   <p>其他内容</p>
+
+  <g-date-picker :value="value" @input="value = $event"></g-date-picker>
 </div> 
 </template>
 <script>
 import GDatePicker from './date-picker/date-picker'
+import GDateRangePicker from './date-picker/date-range-picker'
 
 export default {
   name: "demo",
   components: {
-    GDatePicker
+    GDatePicker,
+    GDateRangePicker
   },
   data(){
     return {
-  
+      d:[],
+      value:new Date(),
+      scope:[new Date(1958,1),new Date(2119,12)]
     }
   },
   mounted(){
@@ -41,6 +47,7 @@ img{
 .page{
   display: flex;
   justify-content: center;
+  padding: 100px;
 }
 .parent{
   height:400px;

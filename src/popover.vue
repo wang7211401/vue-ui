@@ -123,6 +123,7 @@ export default {
         },
         open(){
             this.visible = true
+            this.$emit('open')
             this.$nextTick(()=>{
                 this.positionContent()
                 document.addEventListener('click',this.onClickDocument)
@@ -130,6 +131,7 @@ export default {
         },
         close(){
             this.visible = false
+            this.$emit('close')
             document.removeEventListener('click',this.onClickDocument)
         },
         onClick(event){
@@ -161,7 +163,6 @@ export default {
         filter:drop-shadow(0 0 3px rgba(0,0,0,.5));
         background:white;
         padding:.5em 1em;
-        max-width: 15em;
         word-break: break-all;
         &::before,&::after{
             content:'';
