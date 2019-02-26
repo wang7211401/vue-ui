@@ -1,7 +1,7 @@
 <template>
     <div class="popover" ref="popover">
-        <div class="content-wrapper" ref="contentWrapper" v-if="visible"
-        :class="{[`position-${position}`]:true}">
+        <div class="g-popover-content-wrapper" ref="contentWrapper" v-if="visible"
+        :class="[{[`position-${position}`]:true},popClassName]">
             <slot name="content" :close="close"></slot>
         </div>      
         <span ref="triggerWrapper" style="display:inline-block;">
@@ -19,6 +19,9 @@ export default {
         }
     },
     props:{
+        popClassName:{
+            type:String
+        },
         position:{
             type:String,
             default:'top',
@@ -32,6 +35,9 @@ export default {
             validator(value){
                 return ['click','hover'].indexOf(value) >= 0
             }
+        },
+        container:{
+            type:Element
         }
     },
     mounted(){
@@ -41,6 +47,22 @@ export default {
     beforeDestroy(){
         this.putBackContent()
         this.removeEventListener()
+    },
+    computed:{
+        openEvent(){
+            if(this.trigger === 'click'){
+                return 'click'
+            }else{
+                return 'mouseenter'
+            }
+        },
+        closeEvent(){
+            if(this.trigger === 'click'){
+                return 'click'
+            }else{
+                return 'mouseleave'
+            }
+        }
     },
     methods:{
         addPopoverListeners(){
@@ -60,13 +82,15 @@ export default {
             }
         },
         putBackContent(){
-            const {contentWrapper,trigger} = this.$refs
+            const {contentWrapper,popover} = this.$refs
             if(!contentWrapper){return}
-            document.body.appendChild(contentWrapper)
+            popover.appendChild(contentWrapper)
         },
         positionContent(){
             const {contentWrapper,triggerWrapper} = this.$refs
             document.body.appendChild(contentWrapper)
+            // (this.container || document.body).appendChild(contentWrapper)
+
             const {width,height,top,left} = triggerWrapper.getBoundingClientRect()
             const {height:height2} = contentWrapper.getBoundingClientRect()
             let position ={
@@ -87,7 +111,6 @@ export default {
                     left:left + width + window.scrollX
                 }
             }
-
             contentWrapper.style.left = position[this.position].left + 'px'
             contentWrapper.style.top = position[this.position].top + 'px'          
         },
@@ -131,7 +154,7 @@ export default {
         vertical-align: top;
         position: relative;
     }
-    .content-wrapper{
+    .g-popover-content-wrapper{
         position:absolute;
         border:1px solid $border-color;
         border-radius:$border-radius;
