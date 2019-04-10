@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src\slides\slides-item.vue</title>
+    <title>Code coverage report for src\collapse\collapse-item.vue</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,32 +16,32 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">all files</a> / <a href="index.html">src/slides/</a> slides-item.vue
+      <a href="../../index.html">all files</a> / <a href="index.html">src/collapse/</a> collapse-item.vue
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>0/8</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/0</span>
+        <span class='fraction'>0/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>0/8</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -113,7 +113,20 @@
 68
 69
 70
-71</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -138,19 +151,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">18×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">48×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -184,72 +210,85 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-    &lt;div&gt;
-        &lt;template v-if="animationEnabled"&gt;
-            &lt;transition name="slide"&gt;
-                &lt;div class="g-slides-item" v-if="visible" :class="{reverse}"&gt;
-                    &lt;slot&gt;&lt;/slot&gt;    
-                &lt;/div&gt;    
-            &lt;/transition&gt;
-        &lt;/template&gt;
-        &lt;template v-else&gt;
-            &lt;div class="g-slides-item" v-if="visible" :class="{reverse}"&gt;
-                &lt;slot&gt;&lt;/slot&gt;    
-            &lt;/div&gt;  
-        &lt;/template&gt;
-    &lt;/div&gt;
+    &lt;div class="collapseItem"&gt;
+        &lt;div class="title" @click="toggle" :data-name="name"&gt;
+            {{title}}
+        &lt;/div&gt;
+        &lt;div class="content" ref="content" v-if="open"&gt;
+            &lt;slot&gt;&lt;/slot&gt;
+        &lt;/div&gt;
+    &lt;/div&gt; 
 &lt;/template&gt;
+&nbsp;
 &lt;script&gt;
 export default {
-    name:'GvuiSlidesItem',
+    name:'GvuiCollapseItem',
     props:{
+        title:{
+            type:String,
+            required:true
+        },
         name:{
             type:String,
             required:true
         }
     },
-    data(){
-        return {
-            selected:undefined,
-            reverse:false,
-            animationEnabled:false
+    data()<span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+            open:false
         }
     },
-    updated(){
-        this.animationEnabled = true
+    inject:['eventBus'],
+    mounted()<span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >        this.eventBus &amp;&amp; this.eventBus.$on('update:selected',(names)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >            if(names.indexOf(this.name) &gt;= 0){</span>
+<span class="cstat-no" title="statement not covered" >                this.open = true</span>
+            }else{
+<span class="cstat-no" title="statement not covered" >                this.open = false</span>
+            }
+        })
     },
-    computed:{
-        visible(){
-            return this.selected === this.name
+    methods:{
+        toggle()<span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >            if(this.open){</span>
+<span class="cstat-no" title="statement not covered" >                this.eventBus &amp;&amp; this.eventBus.$emit('update:removeSelected',this.name)</span>
+            }else{
+<span class="cstat-no" title="statement not covered" >                this.eventBus &amp;&amp; this.eventBus.$emit('update:addSelected',this.name)</span>
+            }
         }
     }
 }
 &lt;/script&gt;
 &lt;style lang="scss" scoped&gt;
-    .g-slides-item{
-&nbsp;
-    }
-    .slide-leave-active{
-        position:absolute;
-        left:0;
-        top:0;
-        width:100%;
-        height:100%;
-    }
-    .slide-enter-active,.slide-leave-active{
-        transition:all .5s;
-    }
-    .slide-enter{
-        transform:translateX(100%);
-    }
-    .slide-enter.reverse{
-        transform: translateX(-100%);
-    }
-    .slide-leave-to{
-        transform: translateX(-100%);
-    }
-    .slide-leave-to.reverse{
-        transform:translateX(100%);
+    $grey:#ddd;
+    $border-radius:4px;
+    .collapseItem{
+        &gt; .title{
+            border:1px solid $grey;
+            margin-top:-1px;
+            margin-left:-1px;
+            margin-right:-1px;
+            min-height:32px;
+            display: flex;
+            align-items: center;
+            padding:0 8px;
+            background: lighten($grey,8%);
+        }
+        &amp;:fisrt-child{
+            &gt; .title{
+                border-top-left-radius: $border-radius;
+                border-bottom-left-radius: $border-radius
+            }
+        }
+        &amp;:last-child{
+            &gt; .title:last-child{
+                border-bottom-left-radius: $border-radius;
+                border-bottom-right-radius: $border-radius
+            }
+        }
+        &gt; .content{
+            padding:8px;
+        }
     }
 &lt;/style&gt;
 &nbsp;

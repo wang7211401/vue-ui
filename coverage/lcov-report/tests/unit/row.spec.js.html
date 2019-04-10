@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for tests\unit\tabs.spec.js</title>
+    <title>Code coverage report for tests\unit\row.spec.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,13 +16,13 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">all files</a> / <a href="index.html">tests/unit/</a> tabs.spec.js
+      <a href="../../index.html">all files</a> / <a href="index.html">tests/unit/</a> row.spec.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>16/16</span>
+        <span class='fraction'>18/18</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -32,12 +32,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>5/5</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>16/16</span>
+        <span class='fraction'>18/18</span>
       </div>
     </div>
   </div>
@@ -96,17 +96,11 @@
 51
 52
 53
-54
-55
-56
-57</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+54</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -121,23 +115,8 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -150,10 +129,25 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import chai, { expect } from "chai";
 import sinon from 'sinon'
@@ -163,53 +157,50 @@ chai.use(sinonChai)
 &nbsp;
 import { shallowMount, mount } from "@vue/test-utils";
 import Vue from 'vue'
-import Tabs from '@/tabs/tabs.vue'
-import TabsHead from '@/tabs/tabs-head'
-import TabsBody from '@/tabs/tabs-body'
-import TabsItem from '@/tabs/tabs-item'
-import TabsPane from '@/tabs/tabs-pane'
+import Row from '@/grid/row'
+import Col from '@/grid/col'
 &nbsp;
-describe('Tabs', () =&gt; {
+describe('Row', () =&gt; {
     it('存在.', () =&gt; {
-        expect(Tabs).to.exist
+        expect(Row).to.exist
     })
-    
-    it('接受 selected 属性.', (done) =&gt; {
-        Vue.component('g-tabs', Tabs)
-        Vue.component('g-tabs-head', TabsHead)
-        Vue.component('g-tabs-body', TabsBody)
-        Vue.component('g-tabs-item', TabsItem)
-        Vue.component('g-tabs-pane', TabsPane)
 &nbsp;
-        const wrapper = mount(Tabs,{
+    it('接收 gutter 属性.', (done) =&gt; {
+        Vue.component('g-row', Row)
+        Vue.component('g-col', Col)
+&nbsp;
+        const wrapper = mount(Row, {
             slots: {
                 default: `
-                    &lt;g-tabs selected="sports"&gt;
-                        &lt;g-tabs-head&gt;
-                            &lt;g-tabs-item name="woman"&gt; 美女 &lt;/g-tabs-item&gt;
-                            &lt;g-tabs-item name="finance"&gt; 财经 &lt;/g-tabs-item&gt;
-                            &lt;g-tabs-item name="sports"&gt; 体育 &lt;/g-tabs-item&gt;
-                        &lt;/g-tabs-head&gt;
-                        &lt;g-tabs-body&gt;
-                            &lt;g-tabs-pane name="woman"&gt; 美女相关资讯 &lt;/g-tabs-pane&gt;
-                            &lt;g-tabs-pane name="finance"&gt; 财经相关资讯 &lt;/g-tabs-pane&gt;
-                            &lt;g-tabs-pane name="sports"&gt; 体育相关资讯 &lt;/g-tabs-pane&gt;
-                        &lt;/g-tabs-body&gt;
-                    &lt;/g-tabs&gt;
+                &lt;g-row gutter="20"&gt;
+                    &lt;g-col span="12"&gt;&lt;/g-col&gt;
+                    &lt;g-col span="12"&gt;&lt;/g-col&gt;
+                &lt;/g-row&gt;
                 `
-            },
-            propsData:{
-                selected:'sports'
             }
         })
-        
-        const vm = wrapper.vm
-        vm.$nextTick(()=&gt;{
-            let x = vm.$el.querySelector(`.tabs-item[data-name
-                ="sports"]`)
-            expect(x.classList.contains('active')).to.eq(true)
+        setTimeout(() =&gt; {
+            console.log(wrapper.html())
+            const row = wrapper.find('.row')
+            const cols = wrapper.find('.col')
+            console.log(row)
+                // expect(getComputedStyle(row).marginLeft).to.eq('-10px')
+                // expect(getComputedStyle(row).marginRight).to.eq('-10px')
+                // expect(getComputedStyle(cols).paddingLeft).to.eq('10px')
+                // expect(getComputedStyle(cols).paddingRight).to.eq('10px')
             done()
-        }) 
+        }, 1000)
+&nbsp;
+    })
+&nbsp;
+    it('接收 align 属性', () =&gt; {
+        const wrapper = mount(Row, {
+            propsData: {
+                align: 'right'
+            }
+        })
+        const row = wrapper.find('.row')
+        expect(row.classes('align-right')).to.eq(true)
     })
 })</pre></td></tr>
 </table></pre>

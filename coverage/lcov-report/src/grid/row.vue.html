@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for tests\unit\tabs.spec.js</title>
+    <title>Code coverage report for src\grid\row.vue</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,28 +16,28 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">all files</a> / <a href="index.html">tests/unit/</a> tabs.spec.js
+      <a href="../../index.html">all files</a> / <a href="index.html">src/grid/</a> row.vue
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>16/16</span>
+        <span class='fraction'>8/8</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/0</span>
+        <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>5/5</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>16/16</span>
+        <span class='fraction'>8/8</span>
       </div>
     </div>
   </div>
@@ -98,41 +98,7 @@
 53
 54
 55
-56
-57</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+56</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -149,69 +115,100 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import chai, { expect } from "chai";
-import sinon from 'sinon'
-import sinonChai from 'sinon-chai'
-&nbsp;
-chai.use(sinonChai)
-&nbsp;
-import { shallowMount, mount } from "@vue/test-utils";
-import Vue from 'vue'
-import Tabs from '@/tabs/tabs.vue'
-import TabsHead from '@/tabs/tabs-head'
-import TabsBody from '@/tabs/tabs-body'
-import TabsItem from '@/tabs/tabs-item'
-import TabsPane from '@/tabs/tabs-pane'
-&nbsp;
-describe('Tabs', () =&gt; {
-    it('存在.', () =&gt; {
-        expect(Tabs).to.exist
-    })
-    
-    it('接受 selected 属性.', (done) =&gt; {
-        Vue.component('g-tabs', Tabs)
-        Vue.component('g-tabs-head', TabsHead)
-        Vue.component('g-tabs-body', TabsBody)
-        Vue.component('g-tabs-item', TabsItem)
-        Vue.component('g-tabs-pane', TabsPane)
-&nbsp;
-        const wrapper = mount(Tabs,{
-            slots: {
-                default: `
-                    &lt;g-tabs selected="sports"&gt;
-                        &lt;g-tabs-head&gt;
-                            &lt;g-tabs-item name="woman"&gt; 美女 &lt;/g-tabs-item&gt;
-                            &lt;g-tabs-item name="finance"&gt; 财经 &lt;/g-tabs-item&gt;
-                            &lt;g-tabs-item name="sports"&gt; 体育 &lt;/g-tabs-item&gt;
-                        &lt;/g-tabs-head&gt;
-                        &lt;g-tabs-body&gt;
-                            &lt;g-tabs-pane name="woman"&gt; 美女相关资讯 &lt;/g-tabs-pane&gt;
-                            &lt;g-tabs-pane name="finance"&gt; 财经相关资讯 &lt;/g-tabs-pane&gt;
-                            &lt;g-tabs-pane name="sports"&gt; 体育相关资讯 &lt;/g-tabs-pane&gt;
-                        &lt;/g-tabs-body&gt;
-                    &lt;/g-tabs&gt;
-                `
-            },
-            propsData:{
-                selected:'sports'
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
+    &lt;div class="row" :style="rowStyle" :class="rowClass"&gt;
+        &lt;slot&gt;&lt;/slot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+    name:'GvuiRow',
+    props:{
+        gutter:{
+            type:[Number,String]
+        },
+        align:{
+            type:String,
+            validator(value){
+                console.log(value)
+                return ['left','center','right'].indexOf(value) &gt; -1
             }
+        }
+    },
+    computed:{
+        rowStyle(){
+            let {gutter} =this
+            return{
+                marginLeft:-gutter/2 + 'px',marginRight:-gutter/2 + 'px'
+            }
+        },
+        rowClass(){
+            let {align} = this
+            return [align &amp;&amp; `align-${align}`]
+        }
+    },
+    mounted(){
+        this.$children.forEach(vm =&gt;{
+            vm.gutter = this.gutter
         })
-        
-        const vm = wrapper.vm
-        vm.$nextTick(()=&gt;{
-            let x = vm.$el.querySelector(`.tabs-item[data-name
-                ="sports"]`)
-            expect(x.classList.contains('active')).to.eq(true)
-            done()
-        }) 
-    })
-})</pre></td></tr>
+    }
+}
+&lt;/script&gt;
+&lt;style lang="scss" scoped&gt;
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    &amp;.align-left{
+        justify-content:flex-start;
+    }
+    &amp;.align-center{
+        justify-content:center;
+    }
+    &amp;.align-right{
+        justify-content:flex-end;
+    }
+}
+&lt;/style&gt;
+&nbsp;
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
