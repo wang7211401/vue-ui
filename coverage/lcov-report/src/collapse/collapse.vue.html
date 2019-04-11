@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">64.71% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/17</span>
+        <span class='fraction'>11/17</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>2/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">80% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/5</span>
+        <span class='fraction'>4/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">64.71% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/17</span>
+        <span class='fraction'>11/17</span>
       </div>
     </div>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -122,30 +122,30 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -181,31 +181,31 @@ export default {
             type:Array
         }
     },
-    data()<span class="fstat-no" title="function not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return {</span>
+    data(){
+        return {
             eventBus: new Vue()
         }
     },
-    provide()<span class="fstat-no" title="function not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        if(this.single){</span>
-<span class="cstat-no" title="statement not covered" >            return {</span>
+    provide(){
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(this.single){
+            return {
                 eventBus:this.eventBus
             }
         }
     },
-    mounted()<span class="fstat-no" title="function not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        this.eventBus.$emit('update:selected',this.selected)</span>
-<span class="cstat-no" title="statement not covered" >        this.eventBus.$on('update:addSelected',(name)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
-            let selectedCopy = <span class="cstat-no" title="statement not covered" >JSON.parse(JSON.stringify(this.selected))</span>
-<span class="cstat-no" title="statement not covered" >            if(this.single){</span>
-<span class="cstat-no" title="statement not covered" >                selectedCopy = [name]</span>
+    mounted(){
+        this.eventBus.$emit('update:selected',this.selected)
+        this.eventBus.$on('update:addSelected',(name)=&gt;{
+            let selectedCopy = JSON.parse(JSON.stringify(this.selected))
+            <span class="missing-if-branch" title="else path not taken" >E</span>if(this.single){
+                selectedCopy = [name]
             }else{
 <span class="cstat-no" title="statement not covered" >                selectedCopy.push(name)</span>
             }
-<span class="cstat-no" title="statement not covered" >            this.eventBus.$emit('update:selected',selectedCopy)</span>
-<span class="cstat-no" title="statement not covered" >            this.$emit('update:selected',selectedCopy)</span>
+            this.eventBus.$emit('update:selected',selectedCopy)
+            this.$emit('update:selected',selectedCopy)
         })
-<span class="cstat-no" title="statement not covered" >        this.eventBus.$on('update:removeSelected',(name)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+        this.eventBus.$on('update:removeSelected',(name)=&gt;<span class="fstat-no" title="function not covered" >{</span>
             let selectedCopy = <span class="cstat-no" title="statement not covered" >JSON.parse(JSON.stringify(this.selected))</span>
             let index = <span class="cstat-no" title="statement not covered" >selectedCopy.indexOf(name)</span>
 <span class="cstat-no" title="statement not covered" >            selectedCopy.splice(index,1)    </span>
@@ -229,7 +229,7 @@ export default {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Apr 10 2019 18:01:46 GMT+0800 (GMT+08:00)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Apr 11 2019 16:10:21 GMT+0800 (GMT+08:00)
 </div>
 </div>
 <script src="../../prettify.js"></script>

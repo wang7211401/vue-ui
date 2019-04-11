@@ -14,29 +14,27 @@ describe('Row', () => {
         expect(Row).to.exist
     })
 
-    xit('接收 gutter 属性.', (done) => {
+    it('接收 gutter 属性.', (done) => {
         Vue.component('g-row', Row)
         Vue.component('g-col', Col)
 
         const wrapper = mount(Row, {
             slots: {
-                default: `
-                <g-row gutter="20">
+                default: `    
                     <g-col span="12"></g-col>
                     <g-col span="12"></g-col>
-                </g-row>
                 `
+            },
+            propsData: {
+                gutter: '20'
             }
+
         })
         setTimeout(() => {
-            console.log(wrapper.html())
             const row = wrapper.find('.row')
             const cols = wrapper.find('.col')
-            console.log(row)
-                // expect(getComputedStyle(row).marginLeft).to.eq('-10px')
-                // expect(getComputedStyle(row).marginRight).to.eq('-10px')
-                // expect(getComputedStyle(cols).paddingLeft).to.eq('10px')
-                // expect(getComputedStyle(cols).paddingRight).to.eq('10px')
+            expect(row.attributes().style).to.eq('margin-left: -10px; margin-right: -10px;')
+            expect(cols.attributes().style).to.eq('padding-left: 10px; padding-right: 10px;')
             done()
         }, 1000)
 

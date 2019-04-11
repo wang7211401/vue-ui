@@ -13,7 +13,6 @@ export default {
         align:{
             type:String,
             validator(value){
-                console.log(value)
                 return ['left','center','right'].indexOf(value) > -1
             }
         }

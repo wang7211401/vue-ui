@@ -25,4 +25,29 @@ describe('TabsItem', () => {
     it('TabsPane存在.', () => {
         expect(TabsPane).to.exist
     })
+
+    it('接受 name 属性', () => {
+        const wrapper = mount(TabsItem, {
+            propsData: {
+                name: 'xxx'
+            }
+        })
+        expect(wrapper.props().name).to.eq('xxx')
+    })
+
+    it('接受 disabled 属性', () => {
+        const wrapper = mount(TabsItem, {
+            propsData: {
+                disabled: true,
+                name: 'xxx'
+            }
+        })
+        const vm = wrapper.vm
+        expect(wrapper.props().disabled).to.eq(true)
+        const callback = sinon.fake()
+        vm.$on('click', callback)
+        vm.$el.click()
+        expect(callback).to.have.not.been.called
+    })
+
 })
